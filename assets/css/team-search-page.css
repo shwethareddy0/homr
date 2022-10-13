@@ -3,3 +3,32 @@ body {
   height: 100%;
   color: white;
 }
+
+.main-container {
+  justify-content: space-between;
+  margin: 20px;
+}
+
+#eventday {
+  width: 45%;
+}
+
+#schedule {
+  width: 45%;
+}
+
+.sub-container {
+  justify-content: space-between;
+  margin: 20px;
+}
+
+#ticketinfo {
+  width: 45%;
+}
+
+#teaminfo {
+  width: 45%;
+}
+header {
+  text-align: center;
+}
