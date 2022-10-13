@@ -27,7 +27,7 @@ var game = { // Test purposes only
 }
 
 var team = "Warriors"; // Temporary test variable
-
+var savedGames = [];
 var scheduleEl = $('#schedule'); 
 var scheduleHeaderEl = $('#schedule-header'); 
 var eventdayEl = $('#eventday');
@@ -106,15 +106,19 @@ function renderMainGame(game) {
     // buyTicketsEl.text("Buy Tickets Now!");
 
 function loadGamesIntoStorage() {
-    var game = $(this).parent(); // Change based on how game element is made
+    var game = {};
+    var gameChildrenEl = $(this).parent().children(); // Change based on how game element is made
+    game["title"] = gameChildrenEl.eq(0).text();
+    game["date"] = gameChildrenEl.eq(1).text();
+    game["time"] = gameChildrenEl.eq(2).text();
     savedGames.push(game);
     localStorage.setItem('saved games', JSON.stringify(savedGames));
 }
-
 
 renderGames();
 
 // .saveBtn is name of button for saving specific game. change based on name of button
 scheduleEl.on('click', '.saveBtn', loadGamesIntoStorage);
+eventdayEl.on('click', '.saveBtn', loadGamesIntoStorage);
 
 
