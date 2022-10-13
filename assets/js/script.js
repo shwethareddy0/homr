@@ -70,13 +70,16 @@ function renderGame(game) {
     var timeEl = $('<p class="time"></p>');
     timeEl.text("time: " + game.time);
 
+    var saveBtnEl = $('<button class="saveBtn">save</button>');
+
     gameEl.append(titleEl);
     gameEl.append(dateEl);
     gameEl.append(timeEl);
+    gameEl.append(saveBtnEl);
     scheduleEl.append(gameEl);
 }
 
-function renderMainGame() {
+function renderMainGame(game) {
     var gameEl = $('<div class="main-game"></div>');
     var titleEl = $('<h1 class="main-title"></h1>');
     titleEl.text(game.hometeam + " vs. " + game.opposing) // change based on how game element is constructed
@@ -86,9 +89,12 @@ function renderMainGame() {
     var timeEl = $('<p class="main-time"></p>');
     timeEl.text("time: " + game.time);
 
+    var saveBtnEl = $('<button class="saveBtn">save</button>');
+
     gameEl.append(titleEl);
     gameEl.append(dateEl);
     gameEl.append(timeEl);
+    gameEl.append(saveBtnEl);
     eventdayEl.append(gameEl);
 }
 
@@ -99,6 +105,16 @@ function renderMainGame() {
     // buyTicketsEl.attr("src", game.buy);
     // buyTicketsEl.text("Buy Tickets Now!");
 
+function loadGamesIntoStorage() {
+    var game = $(this).parent(); // Change based on how game element is made
+    savedGames.push(game);
+    localStorage.setItem('saved games', JSON.stringify(savedGames));
+}
 
 
 renderGames();
+
+// .saveBtn is name of button for saving specific game. change based on name of button
+scheduleEl.on('click', '.saveBtn', loadGamesIntoStorage);
+
+
