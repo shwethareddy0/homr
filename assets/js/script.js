@@ -50,24 +50,40 @@ async function getHomeGames(seasonYear, homeTeam) {
         });
 }
 
-async function getOtherGames(seasonYear, homeTeam) {
+var tmKey = config.tmApi
+async function getTickets() {
 
-    var apiURL = 'https://api.sportsdata.io/v3/nba/scores/json/Games/' + seasonYear + '?key=' + nbaApiKey;
+    var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=warriors&city=phoenix&apikey=' + tmKey;
+    // https://app.ticketmaster.com/discovery/v2/events.json?apikey={apikey}
 
     fetch(apiURL)
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
+                    console.log('getting tickets')
+                    console.log(data);
+                });
+            } else {
+                console.log('error: ' + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            console.log('unable to connect to api link');
+        });
+}
 
-                    var homeGames = [];
-                    data.forEach(game => {
-                        if (game.HomeTeam === homeTeam) {
-                            // console.log(game);
-                            homeGames.push(game);
-                        }
-                    }
-                    );
-                    console.log(homeGames)
+async function getEventforVenue(venueID) {
+
+    // var apiURL = 'https://app.ticketmaster.com/discovery/v2/venues.json?keyword=chase&apikey=' + tmKey;
+    // https://app.ticketmaster.com/discovery/v2/events.json?apikey={apikey}
+    // var apiURL = 'https://app.ticketmaster.com/discovery/v2/venues/'+ venueID +'.json?keyword=chase&apikey=' + tmKey;
+
+    fetch(apiURL)
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    console.log('getting tickets')
+                    console.log(data);
                 });
             } else {
                 console.log('error: ' + response.statusText);
@@ -80,6 +96,8 @@ async function getOtherGames(seasonYear, homeTeam) {
 
 
 
-getHomeGames(2022, 'GS');
+getHomeGames(2023, 'GS');
+// getTickets();
+getEventforVenue('KovZ917Ah1H');
 
 
