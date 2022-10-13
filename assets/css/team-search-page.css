@@ -11,6 +11,7 @@ body {
 
 #eventday {
   width: 45%;
+  margin: 10px;
 }
 
 #schedule {
@@ -35,4 +36,8 @@ header {
 
 footer {
   text-align: center;
+}
+
+.savBtn {
+  width: 100px;
 }
