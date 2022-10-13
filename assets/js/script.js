@@ -105,7 +105,14 @@ function renderMainGame(game) {
     // buyTicketsEl.attr("src", game.buy);
     // buyTicketsEl.text("Buy Tickets Now!");
 
-function loadGamesIntoStorage() {
+function loadGamesFromStorage() {
+    var savedGamesStringify = localStorage.getItem('saved games');
+    if (savedGamesStringify) {
+        savedGames = JSON.parse(savedGamesStringify);
+    }
+}
+
+function saveGamesIntoStorage() {
     var game = {};
     var gameChildrenEl = $(this).parent().children(); // Change based on how game element is made
     game["title"] = gameChildrenEl.eq(0).text();
@@ -115,10 +122,11 @@ function loadGamesIntoStorage() {
     localStorage.setItem('saved games', JSON.stringify(savedGames));
 }
 
+loadGamesFromStorage();
 renderGames();
 
 // .saveBtn is name of button for saving specific game. change based on name of button
-scheduleEl.on('click', '.saveBtn', loadGamesIntoStorage);
-eventdayEl.on('click', '.saveBtn', loadGamesIntoStorage);
+scheduleEl.on('click', '.saveBtn', saveGamesIntoStorage);
+eventdayEl.on('click', '.saveBtn', saveGamesIntoStorage);
 
 
