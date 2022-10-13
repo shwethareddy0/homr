@@ -19,10 +19,6 @@ var upcomingGames = [
     }
 ]; // Temporary test variable for upcoming games
 
-var team = "Warriors"; // Temporary test variable
-var gamesEl = $('#games'); // Change depending on name of section with upcoming games
-var gamesHeaderEl = $('#games-header'); // Change depending on name of section with upcoming games
-var mainGameEl = $('#main-game'); // Change depending on name of section with upcoming main game
 var game = { // Test purposes only
     hometeam: "Warriors",
     opposing: "Lakers",
@@ -30,15 +26,33 @@ var game = { // Test purposes only
     time: "11:00 AM"
 }
 
+var team = "Warriors"; // Temporary test variable
+
+var scheduleEl = $('#schedule'); 
+var scheduleHeaderEl = $('#schedule-header'); 
+var eventdayEl = $('#eventday');
+
+
 function renderGames() {
     if(upcomingGames.length === 0) {
-        gamesHeaderEl.text("No upcoming games.");
+        scheduleHeaderEl.text("No upcoming games.");
+
+        var titleEl = $('<h3 class="game-title"></h3>');
+        titleEl.text(team + " have no games");
+        eventdayEl.append(titleEl);
+
         return;
     }
 
     renderMainGame(upcomingGames[0]);
 
-    gamesHeaderEl.text(team + "'s Upcoming Games"); // Change variable name of team if needed
+    scheduleHeaderEl.text(team + "'s Upcoming Games"); // Change variable name of team if needed
+
+    if(upcomingGames.length === 1) {
+        scheduleHeaderEl.text("No upcoming more games.");
+        
+        return;
+    }
 
     for(var i = 1; i < upcomingGames.length; i++) {
         renderGame(upcomingGames[i]);
@@ -59,7 +73,7 @@ function renderGame(game) {
     gameEl.append(titleEl);
     gameEl.append(dateEl);
     gameEl.append(timeEl);
-    gamesEl.append(gameEl);
+    scheduleEl.append(gameEl);
 }
 
 function renderMainGame() {
@@ -75,7 +89,7 @@ function renderMainGame() {
     gameEl.append(titleEl);
     gameEl.append(dateEl);
     gameEl.append(timeEl);
-    mainGameEl.append(gameEl);
+    eventdayEl.append(gameEl);
 }
 
 // Load tickets:
@@ -88,4 +102,3 @@ function renderMainGame() {
 
 
 renderGames();
-renderGame(0, game);
