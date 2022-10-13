@@ -174,33 +174,7 @@ async function uberApi(seasonYear, homeTeam) {
 }
 
 
-async function getLastGameScore(seasonYear, teamName) {
 
-    var apiURL = 'https://api.sportsdata.io/v3/nba/scores/json/Games/' + seasonYear + '?key=' + nbaApiKey;
-
-
-    fetch(apiURL)
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-
-                    //todo: get last played game score
-                    data.forEach(game => {
-                        if(game.HomeTeam === teamName) {
-                            console.log(game);
-                        }
-                        
-                    });
-
-                });
-            } else {
-                console.log('error: ' + response.statusText);
-            }
-        })
-        .catch(function (error) {
-            console.log('unable to connect to api link');
-        });
-}
 
 function getTicketMaster(sport) {
 
@@ -230,66 +204,7 @@ function getTicketMaster(sport) {
         });
 }
 
-// function to get ticketmaster url link to the next game of a specific team;
-// TODO: do more filtering to get the following results:
-// game date, teams involved, url to ticketmaster
-function getTicketMaster(sport, teamName) {
 
-    var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword='+sport+'&sort=date,asc&apikey=' + tmKey;
-    // var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?promoterId='+sport+'&sort=date,asc&apikey=' + tmKey;
-    fetch(apiURL)
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-
-                    //todo: get last played game score
-                    var games = data['_embedded'].events;
-                    // console.log(data['_embedded'].events);
-                    // var eventDates = [];
-                    games.forEach(game => {
-                        // if the game promoter exists
-                        if(game.promoter) {
-                            var promoters = game.promoter.name.split(' ');
-                            // console.log(game.promoter.name.split(' '))
-                            if(promoters.includes(sport.toUpperCase())) {
-                                console.log(game.name.toUpperCase().split()); 
-                                // console.log(game.dates)
-                                // if(game.name.toUpperCase().split().includes(teamName.toUpperCase())) {
-                                //     console.log(game.name)
-                                // }
-                            }
-                        }
-                        
-                        // if(game.promoter) {
-                        //     // console.log(game.promoter.name.split(' '));
-                        //     console.log(game.promoter['name'])
-                        //     // if(game.promoter.name.split(' ').includes(sport.toUpperCase())) {
-                        //     //     if (game.prmoter.name) {
-                        //     //         console.log(game.promoter.name)
-                        //     //     }
-                        //     // }
-                        // }
-                        // console.log(game.promoter)
-                        // if (game.promoter['name'].split(' ').includes(sport.toUpperCase())) {
-                        //     console.log(game.promoter)
-                        //     // console.log(game.promoter['name'])
-                        // }
-                        // console.log(game.promoter);
-                        // console.log(game['url']);
-                    });
-
-                });
-            } else {
-                console.log('error: ' + response.statusText);
-            }
-        })
-        .catch(function (error) {
-            console.log('unable to connect to api link');
-        });
-}
-
-
-//
 // uses ticketmaster api
 // can access: game name, game date, ticket url, venue name;
 async function getNextGameTickets(team, league) {
@@ -335,4 +250,37 @@ async function getNextGameTickets(team, league) {
 
 
 getNextGameTickets('dodgers', 'mlb')
+
+//function to get the last game score of a certain team
+// parameters are: league name, year of the season, name of team
+async function mlbGetLastGameScore(league, seasonYear, teamName) {
+
+    // var apiURL = 'https://api.sportsdata.io/v3/' + league + '/scores/json/Games/' + seasonYear + '?key=' + nbaApiKey;
+    var apiURL = 'https://api.sportsdata.io/v3/' + league + '/scores/json/TeamSeasonStats/' + seasonYear + '?key=' + config.mlbKey;
+
+
+    fetch(apiURL)
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+
+                    //todo: get last played game score
+                    console.log(data)
+                    data.forEach(game => {
+                        if(game.HomeTeam === teamName) {
+                            console.log(game);
+                        }
+                    });
+
+                });
+            } else {
+                console.log('error: ' + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            console.log('unable to connect to api link');
+        });
+}
+
+mlbGetLastGameScore('mlb', 2021, 'giants')
 
