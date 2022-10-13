@@ -22,6 +22,7 @@ var upcomingGames = [
 var team = "Warriors"; // Temporary test variable
 var gamesEl = $('#games'); // Change depending on name of section with upcoming games
 var gamesHeaderEl = $('#games-header'); // Change depending on name of section with upcoming games
+var mainGameEl = $('#main-game'); // Change depending on name of section with upcoming main game
 var game = { // Test purposes only
     hometeam: "Warriors",
     opposing: "Lakers",
@@ -35,7 +36,7 @@ function renderGames() {
         return;
     }
 
-    renderFirstGame(upcomingGames[0]);
+    renderMainGame(upcomingGames[0]);
 
     gamesHeaderEl.text(team + "'s Upcoming Games"); // Change variable name of team if needed
 
@@ -47,7 +48,7 @@ function renderGames() {
 
 function renderGame(game) {
     var gameEl = $('<div class="game"></div>');
-    var titleEl = $('<h3 class="title"></h3>');
+    var titleEl = $('<h3 class="game-title"></h3>');
     titleEl.text(game.hometeam + " vs. " + game.opposing) // change based on how game element is constructed
 
     var dateEl = $('<p class="date"></p>');
@@ -61,6 +62,22 @@ function renderGame(game) {
     gamesEl.append(gameEl);
 }
 
+function renderMainGame() {
+    var gameEl = $('<div class="main-game"></div>');
+    var titleEl = $('<h1 class="main-title"></h1>');
+    titleEl.text(game.hometeam + " vs. " + game.opposing) // change based on how game element is constructed
+
+    var dateEl = $('<p class="main-date"></p>');
+    dateEl.text("date: " + game.date);
+    var timeEl = $('<p class="main-time"></p>');
+    timeEl.text("time: " + game.time);
+
+    gameEl.append(titleEl);
+    gameEl.append(dateEl);
+    gameEl.append(timeEl);
+    mainGameEl.append(gameEl);
+}
+
 // Load tickets:
     // var priceEl = $('<p class="tickets"></p>');
     // priceEl.text("ticket price: " + game.price);
@@ -68,4 +85,7 @@ function renderGame(game) {
     // buyTicketsEl.attr("src", game.buy);
     // buyTicketsEl.text("Buy Tickets Now!");
 
+
+
 renderGames();
+renderGame(0, game);
