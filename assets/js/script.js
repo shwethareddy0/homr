@@ -12,7 +12,7 @@ async function nbaGetSeasonGames(seasonYear) {
             if (response.ok) {
                 response.json().then(function (data) {
                     console.log(data);
-                    
+
                 });
             } else {
                 console.log('error: ' + response.statusText);
@@ -122,12 +122,12 @@ async function getNextHomeGameDate(seasonYear, homeTeam) {
                             }
                         }
                     }
-                    
-                    
+
+
                     );
                     console.log(arr);
                     return arr;
-                   
+
                 });
             } else {
                 console.error('error: ' + response.statusText);
@@ -157,12 +157,12 @@ async function uberApi(seasonYear, homeTeam) {
                             }
                         }
                     }
-                    
-                    
+
+
                     );
                     console.log(arr);
                     return arr;
-                   
+
                 });
             } else {
                 console.error('error: ' + response.statusText);
@@ -179,7 +179,7 @@ async function uberApi(seasonYear, homeTeam) {
 function getTicketMaster(sport) {
 
     // var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword='+sport+'&sort=date,asc&apikey=' + tmKey;
-    var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?promoterId='+sport+'&sort=date,asc&apikey=' + tmKey;
+    var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?promoterId=' + sport + '&sort=date,asc&apikey=' + tmKey;
     fetch(apiURL)
         .then(function (response) {
             if (response.ok) {
@@ -209,7 +209,7 @@ function getTicketMaster(sport) {
 // can access: game name, game date, ticket url, venue name;
 async function getNextGameTickets(team, league) {
 
-    var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword='+team+'&sort=date,asc&apikey=' + tmKey;
+    var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + team + '&sort=date,asc&apikey=' + tmKey;
 
     fetch(apiURL)
         .then(function (response) {
@@ -218,11 +218,11 @@ async function getNextGameTickets(team, league) {
                     let allEvents = data['_embedded'].events;
                     console.log(allEvents);
                     allEvents.forEach(game => {
-                        if(game.promoter) {
+                        if (game.promoter) {
                             let gamePromoters = game.promoter.name.split(' ');
                             // console.log(gamePromoters)
-                            
-                            if(gamePromoters.includes(league.toUpperCase())) {
+
+                            if (gamePromoters.includes(league.toUpperCase())) {
                                 let gameDate = game.dates.start.localDate;
                                 let gameName = game.name;
                                 let gameVenue = game._embedded.venues[0].name;
@@ -232,7 +232,7 @@ async function getNextGameTickets(team, league) {
                                 console.log(gameName);
                                 console.log(gameVenue);
                                 console.log(ticketUrl);
-                                
+
                             }
 
                         }
@@ -253,10 +253,12 @@ getNextGameTickets('dodgers', 'mlb')
 
 //function to get the last game score of a certain team
 // parameters are: league name, year of the season, name of team
-async function mlbGetLastGameScore(league, seasonYear, teamName) {
+async function getLastGameScore(league, seasonYear, teamName) {
 
     // var apiURL = 'https://api.sportsdata.io/v3/' + league + '/scores/json/Games/' + seasonYear + '?key=' + nbaApiKey;
-    var apiURL = 'https://api.sportsdata.io/v3/' + league + '/scores/json/TeamSeasonStats/' + seasonYear + '?key=' + config.mlbKey;
+    // https://api.sportsdata.io/v3/mlb/scores/json/teams
+    // https://api.sportsdata.io/v3/mlb/scores/json/TeamGameStatsBySeason/{season}/{teamid}/{numberofgames}
+    // var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/TeamGameStatsBySeason/' + seasonYear + '/{teamid}/all';
 
 
     fetch(apiURL)
@@ -266,11 +268,7 @@ async function mlbGetLastGameScore(league, seasonYear, teamName) {
 
                     //todo: get last played game score
                     console.log(data)
-                    data.forEach(game => {
-                        if(game.HomeTeam === teamName) {
-                            console.log(game);
-                        }
-                    });
+
 
                 });
             } else {
@@ -282,5 +280,44 @@ async function mlbGetLastGameScore(league, seasonYear, teamName) {
         });
 }
 
-mlbGetLastGameScore('mlb', 2021, 'giants')
+getLastGameScore('mlb', 2022, Giants)
+
+
+// gets list of mlb teams by id
+async function nbaGetTeamIds(teamName) {
+    var apiURL = 'https://api.sportsdata.io/v3/nba/scores/json/teams?key=' + config.nbaKey;
+    fetch(apiURL)
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+
+                    //todo: get last played game score
+                    var teamInfoData = [];
+                    data.forEach(team => {
+                        teamInfoData.push({
+                            teamID: team.TeamID,
+                            city: team.City,
+                            teamName: team.Name,
+                            teamKey: team.Key
+                        })
+                        // console.log(team);
+                    });
+
+                    console.log(teamInfoData);
+                    return teamInfoData;
+
+
+                });
+            } else {
+                console.log('error: ' + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            console.log('unable to connect to api link');
+        });
+
+}
+
+
+// mlbGetLastGameScore('mlb', 2021, 'giants')
 
