@@ -369,7 +369,42 @@ async function mlbSchedule(seasonYear) {
             console.log('unable to connect to api link')
         })
 }
+//api function call to get the standings for the year
+async function nbaGetStandings() {
+    
+    var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Standings/2022?key=ae5378a25a0f4bafb84e143f07a44618';
 
+
+    fetch(apiURL)
+        .then(function (response) {
+            if (response.ok) {
+                response.json().then(function (data) {
+                    console.log(data);
+                    var gamewinS=[];
+                    var gamelosses=[];
+                    for(i=0;i<=data.length;i++){
+                        //home+away=total
+                        console.log(data[i].AwayWins);
+                        console.log(data[i].HomeWins); 
+                        console.log(data[i].AwayLosses);
+                        console.log(data[i].HomeLosses);
+                        var totalwins=data[i].AwayWins+data[i].HomeWins;
+                        var totalLoss=data[i].AwayLosses+data[i].HomeLosses;
+                        console.log(totalwins);
+                        console.log(totalLoss);
+
+                    }
+                      
+                });
+            } else {
+                console.log('error: ' + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            console.log('unable to connect to api link');
+        });
+
+}
 mlbSchedule('2022POST')
 
 
