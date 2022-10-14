@@ -174,8 +174,6 @@ async function uberApi(seasonYear, homeTeam) {
 }
 
 
-
-
 function getTicketMaster(sport) {
 
     // var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword='+sport+'&sort=date,asc&apikey=' + tmKey;
