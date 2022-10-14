@@ -134,7 +134,6 @@ renderGames();
 $('.dropdown-item').on('click', function () {
   var team  = $(this).text().trim();
   var nextpage = './team-search-page.html#' + team;
-  console.log(nextpage);
   location.replace(nextpage);
 })
 

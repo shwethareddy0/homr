@@ -24,6 +24,8 @@ async function nbaGetSeasonGames(seasonYear) {
 
 }
 
+nbaGetSeasonGames(2023);
+
 //Gets all home games for a given team
 async function nbaGetHomeGames(seasonYear, homeTeam) {
 
@@ -246,8 +248,7 @@ async function getNextGameTickets(team, league) {
         });
 }
 
-
-// getNextGameTickets('dodgers', 'mlb')
+getNextGameTickets('dodgers', 'mlb')
 
 //function to get the last game score of a certain team
 // parameters are: league name, year of the season, name of team
