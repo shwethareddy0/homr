@@ -131,6 +131,13 @@ function saveGamesIntoStorage() {
 loadGamesFromStorage();
 renderGames();
 
+$('.dropdown-item').on('click', function () {
+  var team  = $(this).text().trim();
+  var nextpage = './team-search-page.html#' + team;
+  console.log(nextpage);
+  location.replace(nextpage);
+})
+
 // .saveBtn is name of button for saving specific game. change based on name of button
 scheduleEl.on("click", ".saveBtn", saveGamesIntoStorage);
 eventdayEl.on("click", ".saveBtn", saveGamesIntoStorage);
