@@ -247,16 +247,28 @@ async function getNextGameTickets(team, league) {
 }
 
 
-getNextGameTickets('dodgers', 'mlb')
+// getNextGameTickets('dodgers', 'mlb')
 
 //function to get the last game score of a certain team
 // parameters are: league name, year of the season, name of team
-async function getLastGameScore(league, seasonYear, teamName) {
+async function mlbLastGameScore(seasonYear, teamName) {
 
     // var apiURL = 'https://api.sportsdata.io/v3/' + league + '/scores/json/Games/' + seasonYear + '?key=' + nbaApiKey;
     // https://api.sportsdata.io/v3/mlb/scores/json/teams
     // https://api.sportsdata.io/v3/mlb/scores/json/TeamGameStatsBySeason/{season}/{teamid}/{numberofgames}
-    // var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/TeamGameStatsBySeason/' + seasonYear + '/{teamid}/all';
+    // https://api.sportsdata.io/v3/mlb/scores/json/TeamGameStatsBySeason/2021/2/all?key=082724269f274dcb8ec595593f5954a6
+    var teamID;
+    // let nbaTeams = nbaTeams;
+    mlbTeams.forEach(team => {
+        // console.log(team.teamName)
+        // console.log(team.teamID)
+        if (teamName === team.teamName) {
+            // console.log(team.teamName)
+            teamID = team.teamID;
+        }
+    });
+    // console.log(teamID);
+    var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/TeamGameStatsBySeason/' + seasonYear + '/' + teamID + '/all?key=' + config.mlbKey;
 
 
     fetch(apiURL)
@@ -266,6 +278,7 @@ async function getLastGameScore(league, seasonYear, teamName) {
 
                     //todo: get last played game score
                     console.log(data)
+                    console.log(data[0].Day)
 
 
                 });
@@ -278,7 +291,7 @@ async function getLastGameScore(league, seasonYear, teamName) {
         });
 }
 
-getLastGameScore('mlb', 2022, Giants)
+// mlbLastGameScore(2022, 'Giants')
 
 
 // gets list of mlb teams by id
@@ -315,6 +328,49 @@ async function nbaGetTeamIds(teamName) {
         });
 
 }
+
+// a function to get all scheduled mlb games
+// takes info from all game data:
+// gameDay, gameTime, awayTeam, homeTeam, channel, gameID
+// parameters: seasonyear along with time of season
+// ex 2022 for the regular season
+// 2022POST for 2022 playoffs
+// 2022PRE for preseason
+// can store information in local storage
+async function mlbSchedule(seasonYear) {
+    var aprURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Games/' + seasonYear + '?key=' + config.mlbKey;
+
+    fetch(aprURL).then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+    })
+        .then(data => {
+            //game necessary info from response 
+            var scheduleInfo = []
+            data.forEach(game => {
+                if (game.Status === 'Scheduled' || game.Status === 'Postponed') {
+                    scheduleInfo.push({
+                         gameDay: game.DateTime.split('T')[0],
+                         gameTime: game.DateTime.split('T')[1],
+                         awayTeam: game.AwayTeam,
+                         homeTeam: game.HomeTeamk,
+                         channel: game.Channel,
+                         gameID: game.GameID
+                    })
+                }
+            })
+
+            // access scheduleInfo here to build dynamic html
+            console.log(scheduleInfo);
+            localStorage.setItem('mlbSchedule', JSON.stringify(scheduleInfo));
+        })
+        .catch(error => {
+            console.log('unable to connect to api link')
+        })
+}
+
+mlbSchedule('2022POST')
 
 
 // mlbGetLastGameScore('mlb', 2021, 'giants')
