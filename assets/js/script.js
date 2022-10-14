@@ -1,4 +1,4 @@
-var upcomingGames = [
+var mlbSchedule = [
   {
     // Test purposes only
     hometeam: "Warriors",
@@ -31,13 +31,16 @@ var game = {
 };
 
 var team = "Warriors"; // Temporary test variable
+var teamEl = $("#team");
 var savedGames = [];
 var scheduleEl = $("#schedule");
 var scheduleHeaderEl = $("#schedule-header");
 var eventdayEl = $("#eventday");
 
 function renderGames() {
-  if (upcomingGames.length === 0) {
+  team = document.location.href.split("#")[1];
+  teamEl.text(team);
+  if (mlbSchedule.length === 0) {
     scheduleHeaderEl.text("No upcoming games.");
 
     var titleEl = $('<h3 class="game-title"></h3>');
@@ -47,30 +50,31 @@ function renderGames() {
     return;
   }
 
-  renderMainGame(upcomingGames[0]);
+  renderMainGame(mlbSchedule[0]);
 
   scheduleHeaderEl.text(team + "'s Upcoming Games"); // Change variable name of team if needed
 
-  if (upcomingGames.length === 1) {
+  if (mlbSchedule.length === 1) {
     scheduleHeaderEl.text("No upcoming more games.");
 
     return;
   }
 
-  for (var i = 1; i < upcomingGames.length; i++) {
-    renderGame(upcomingGames[i]);
+  for (var i = 1; i < 3; i++) {
+    renderGame(mlbSchedule[i]);
   }
 }
 
 function renderGame(game) {
   var gameEl = $('<div class="game"></div>');
   var titleEl = $('<h3 class="game-title"></h3>');
-  titleEl.text(game.hometeam + " vs. " + game.opposing); // change based on how game element is constructed
-
+  var awayTeam = findAwayTeam(game.awayTeam);
+  titleEl.text(team + " vs. " + awayTeam); // change based on how game element is constructed
+  
   var dateEl = $('<p class="date"></p>');
-  dateEl.text("date: " + game.date);
+  dateEl.text("date: " + game.gameDay);
   var timeEl = $('<p class="time"></p>');
-  timeEl.text("time: " + game.time);
+  timeEl.text("time: " + game.gameTime);
 
   var saveBtnEl = $(
     '<button class="saveBtn button is-success is-outlined">Save</button>'
@@ -83,15 +87,25 @@ function renderGame(game) {
   scheduleEl.append(gameEl);
 }
 
+function findAwayTeam(awayTeam) {
+  for(var i = 0; i < mlbTeams.length; i++) {
+    if (mlbTeams[i].teamKey === awayTeam) {
+      return mlbTeams[i].teamName;
+    }
+  }
+  return "invalid team";
+}
+
 function renderMainGame(game) {
   var gameEl = $('<div class="main-game"></div>');
   var titleEl = $('<h1 class="main-title"></h1>');
-  titleEl.text(game.hometeam + " vs. " + game.opposing); // change based on how game element is constructed
+  var awayTeam = findAwayTeam(game.awayTeam);
+  titleEl.text(team + " vs. " + awayTeam); // change based on how game element is constructed
 
   var dateEl = $('<p class="main-date"></p>');
-  dateEl.text("date: " + game.date);
+  dateEl.text("date: " + game.gameDay);
   var timeEl = $('<p class="main-time"></p>');
-  timeEl.text("time: " + game.time);
+  timeEl.text("time: " + game.gameTime);
 
   var saveBtnEl = $(
     '<button class="saveBtn button is-success is-outlined">Save</button>'
@@ -115,6 +129,11 @@ function loadGamesFromStorage() {
   var savedGamesStringify = localStorage.getItem("saved games");
   if (savedGamesStringify) {
     savedGames = JSON.parse(savedGamesStringify);
+  }
+
+  var mlbScheduleStringify = localStorage.getItem("mlbSchedule");
+  if (mlbScheduleStringify) {
+    mlbSchedule = JSON.parse(mlbScheduleStringify);
   }
 }
 
