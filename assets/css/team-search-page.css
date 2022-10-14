@@ -41,3 +41,6 @@ footer {
 .savBtn {
   width: 100px;
 }
+footer a {
+  color: white;
+}
