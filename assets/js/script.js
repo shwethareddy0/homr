@@ -68,8 +68,9 @@ function renderGames() {
 function renderGame(game) {
   var gameEl = $('<div class="game"></div>');
   var titleEl = $('<h3 class="game-title"></h3>');
-  titleEl.text(team + " vs. " + game.awayTeam); // change based on how game element is constructed
-
+  var awayTeam = findAwayTeam(game.awayTeam);
+  titleEl.text(team + " vs. " + awayTeam); // change based on how game element is constructed
+  
   var dateEl = $('<p class="date"></p>');
   dateEl.text("date: " + game.gameDay);
   var timeEl = $('<p class="time"></p>');
@@ -86,11 +87,20 @@ function renderGame(game) {
   scheduleEl.append(gameEl);
 }
 
+function findAwayTeam(awayTeam) {
+  for(var i = 0; i < mlbTeams.length; i++) {
+    if (mlbTeams[i].teamKey === awayTeam) {
+      return mlbTeams[i].teamName;
+    }
+  }
+  return "invalid team";
+}
+
 function renderMainGame(game) {
   var gameEl = $('<div class="main-game"></div>');
   var titleEl = $('<h1 class="main-title"></h1>');
-  // var awayTeam = teams.mlbteams.find().
-  titleEl.text(team + " vs. " + game.awayTeam); // change based on how game element is constructed
+  var awayTeam = findAwayTeam(game.awayTeam);
+  titleEl.text(team + " vs. " + awayTeam); // change based on how game element is constructed
 
   var dateEl = $('<p class="main-date"></p>');
   dateEl.text("date: " + game.gameDay);
