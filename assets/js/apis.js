@@ -205,37 +205,50 @@ function getTicketMaster(sport) {
 
 // uses ticketmaster api
 // can access: game name, game date, ticket url, venue name;
-async function getNextGameTickets(team, league) {
+// filters onsale tickets
+async function ticketsOnSaleMLB(team, league) {
 
-    var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + team + '&sort=date,asc&apikey=' + tmKey;
+    var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + team + '&size=100&sort=date,asc&apikey=' + tmKey;
 
     fetch(apiURL)
         .then(function (response) {
             if (response.ok) {
                 response.json().then(function (data) {
+                    // console.log(data)
                     let allEvents = data['_embedded'].events;
-                    console.log(allEvents);
+                    
+                    scheduledGames = [];
                     allEvents.forEach(game => {
                         if (game.promoter) {
                             let gamePromoters = game.promoter.name.split(' ');
                             // console.log(gamePromoters)
 
-                            if (gamePromoters.includes(league.toUpperCase())) {
-                                let gameDate = game.dates.start.localDate;
-                                let gameName = game.name;
-                                let gameVenue = game._embedded.venues[0].name;
-                                let ticketUrl = game.url
-
-                                console.log(gameDate);
-                                console.log(gameName);
-                                console.log(gameVenue);
-                                console.log(ticketUrl);
-
+                            if (gamePromoters.includes(league.toUpperCase()) && gamePromoters.includes('PLAYOFFS')) {
+                                // let gameDate = game.dates.start.localDate;
+                                // let gameName = game.name;
+                                // let gameVenue = game._embedded.venues[0].name;
+                                // let ticketUrl = game.url
+                                console.log(game)
+                                if(game.dates.status.code === 'onsale') {
+                                    console.log('tickets onsale')
+                                    scheduledGames.push({
+                                        gameDate: game.dates.start.localDate,
+                                        gameName: game.name,
+                                        gameVenue: game._embedded.venues[0].name,
+                                        ticketUrl: game.url,
+                                        geolocation: {
+                                            latitude: game._embedded.venues[0].location.latitude,
+                                            longitude: game._embedded.venues[0].location.longitude
+                                        }
+                                    })
+                                }
+                                
                             }
 
                         }
                     });
-                    // console.log()
+                    console.log(scheduledGames);
+                    localStorage.setItem('ticketsOnSaleMLB', scheduledGames);
                 });
             } else {
                 console.log('error: ' + response.statusText);
@@ -247,7 +260,7 @@ async function getNextGameTickets(team, league) {
 }
 
 
-// getNextGameTickets('dodgers', 'mlb')
+ticketsOnSaleMLB('nba', 'nba')
 
 //function to get the last game score of a certain team
 // parameters are: league name, year of the season, name of team
