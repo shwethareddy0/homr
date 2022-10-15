@@ -1,3 +1,55 @@
+//Used for chart generation
+var seasonyear=new Date().getFullYear();
+var gamewins=[];
+var gamelosses=[];
+var cities=[];
+mlbGetStandings();
+async function mlbGetStandings() {
+    
+  var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Standings/'+seasonyear+'?key=ae5378a25a0f4bafb84e143f07a44618';
+
+
+  fetch(apiURL)
+      .then(function (response) {
+          return response.json();
+      })
+      .then(function (data) {
+          console.log(data);
+          gamewins=[];
+          gamelosses=[];
+          for(i=0; i < data.length;i++){
+              //home+away=total
+
+              var totalwins=data[i].AwayWins+data[i].HomeWins;
+              var totalLoss=data[i].AwayLosses+data[i].HomeLosses;
+              var city=data[i].City;
+
+              gamewins.push(totalwins);
+              gamelosses.push(totalLoss);
+              cities.push(city);
+              //console.log(totalwins);
+              //console.log(totalLoss);
+
+          }
+        })
+      .then(function () {
+
+          var ctx=document.getElementById('chart').getContext('2d');
+          new Chart(ctx,{
+              type: 'bar',
+              data:{
+                  labels:cities,
+                  datasets:[{
+                      label:'Total Wins',
+                      data: gamewins,
+          
+                  }]
+          
+              }
+          })
+          
+      })
+}
 var mlbSchedule = [
   {
     // Test purposes only
