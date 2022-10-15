@@ -3,7 +3,57 @@ var seasonyear=new Date().getFullYear();
 var gamewins=[];
 var gamelosses=[];
 var cities=[];
+
+var mlbSchedule = [
+  {
+    // Test purposes only
+    hometeam: "Warriors",
+    opposing: "Lakers",
+    date: "11/20/2022",
+    time: "11:00 AM",
+  },
+  {
+    // Test purposes only
+    hometeam: "Warriors",
+    opposing: "Lakers",
+    date: "11/20/2022",
+    time: "11:00 AM",
+  },
+  {
+    // Test purposes only
+    hometeam: "Warriors",
+    opposing: "Lakers",
+    date: "11/20/2022",
+    time: "11:00 AM",
+  },
+]; // Temporary test variable for upcoming games
+
+var game = {
+  // Test purposes only
+  hometeam: "Warriors",
+  opposing: "Lakers",
+  date: "11/20/2022",
+  time: "11:00 AM",
+};
+
+var team = "Warriors"; // Temporary test variable
+var teamEl = $("#team");
+var savedGames = [];
+var scheduleEl = $("#schedule");
+var scheduleHeaderEl = $("#schedule-header");
+var eventdayEl = $("#eventday");
+
+
+//navbar-dropdown collapse on page load
+$(".navbar-item.has-dropdown").children().children().toggle();
+
+//navbar-dropdown display navbar-items on click
+$(".navbar-item.has-dropdown").click(function () {
+  $(this).children().children().toggle();
+});
+
 mlbGetStandings();
+
 async function mlbGetStandings() {
     
   var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Standings/'+seasonyear+'?key=ae5378a25a0f4bafb84e143f07a44618';
@@ -50,44 +100,6 @@ async function mlbGetStandings() {
           
       })
 }
-var mlbSchedule = [
-  {
-    // Test purposes only
-    hometeam: "Warriors",
-    opposing: "Lakers",
-    date: "11/20/2022",
-    time: "11:00 AM",
-  },
-  {
-    // Test purposes only
-    hometeam: "Warriors",
-    opposing: "Lakers",
-    date: "11/20/2022",
-    time: "11:00 AM",
-  },
-  {
-    // Test purposes only
-    hometeam: "Warriors",
-    opposing: "Lakers",
-    date: "11/20/2022",
-    time: "11:00 AM",
-  },
-]; // Temporary test variable for upcoming games
-
-var game = {
-  // Test purposes only
-  hometeam: "Warriors",
-  opposing: "Lakers",
-  date: "11/20/2022",
-  time: "11:00 AM",
-};
-
-var team = "Warriors"; // Temporary test variable
-var teamEl = $("#team");
-var savedGames = [];
-var scheduleEl = $("#schedule");
-var scheduleHeaderEl = $("#schedule-header");
-var eventdayEl = $("#eventday");
 
 function renderGames() {
   team = document.location.href.split("#")[1];
@@ -122,7 +134,7 @@ function renderGame(game) {
   var titleEl = $('<h3 class="game-title"></h3>');
   var awayTeam = findAwayTeam(game.awayTeam);
   titleEl.text(team + " vs. " + awayTeam); // change based on how game element is constructed
-  
+
   var dateEl = $('<p class="date"></p>');
   dateEl.text("date: " + game.gameDay);
   var timeEl = $('<p class="time"></p>');
@@ -140,7 +152,7 @@ function renderGame(game) {
 }
 
 function findAwayTeam(awayTeam) {
-  for(var i = 0; i < mlbTeams.length; i++) {
+  for (var i = 0; i < mlbTeams.length; i++) {
     if (mlbTeams[i].teamKey === awayTeam) {
       return mlbTeams[i].teamName;
     }
@@ -202,12 +214,12 @@ function saveGamesIntoStorage() {
 loadGamesFromStorage();
 renderGames();
 
-$('.dropdown-item').on('click', function () {
-  var team  = $(this).text().trim();
-  var nextpage = './team-search-page.html#' + team;
+$(".dropdown-item").on("click", function () {
+  var team = $(this).text().trim();
+  var nextpage = "./team-search-page.html#" + team;
   console.log(nextpage);
   location.replace(nextpage);
-})
+});
 
 // .saveBtn is name of button for saving specific game. change based on name of button
 scheduleEl.on("click", ".saveBtn", saveGamesIntoStorage);

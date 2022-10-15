@@ -1,136 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Homr</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
     <title>HOMR</title>
   </head>
 
-  <img src="./images/logo.jpg" width="150" height="50"> 
-  <body class="has-background-link-dark">
-  <section class="section">
-    <div class="container" 	>
-    <!--navbar-->
-     <nav class="navbar" role="navigation" aria-label="main navigation">
-  
-      <div class="navbar-brand">
-      
-          <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-end">
-              <div class="dropdown is-hoverable">
-                <div class="dropdown-trigger">
-                  <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
-                    <span>Teams</span>
-                    <span class="icon is-small">
-                      <i class="fas fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                  </button>
-                </div>
-                <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-                  <div class="dropdown-content">
-                    
-                      <a href="#" class="dropdown-item">
-                        Angles
-                      </a>
-                      
-                      <a href="#" class="dropdown-item">
-                      Astros
-                      </a>
-                      <a href="#" class="dropdown-item">
-                        Athletics
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Braves
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Brewers
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Cardinals
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Cubs
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Diamondbacks
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Dodgers
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Giants
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Indians
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Blue Jays
-                        </a><a href="#" class="dropdown-item">
-                          Mariners
-                        </a><a href="#" class="dropdown-item">
-                          Marlins
-                        </a><a href="#" class="dropdown-item">
-                          Mets
-                        </a><a href="#" class="dropdown-item">
-                          Nationals
-                        </a><a href="#" class="dropdown-item">
-                          Orioles
-                        </a><a href="#" class="dropdown-item">
-                          Padres
-                        </a><a href="#" class="dropdown-item">
-                          Phillies
-                        </a><a href="#" class="dropdown-item">
-                          Pirates
-                        </a><a href="#" class="dropdown-item">
-                          Rangers
-                        </a><a href="#" class="dropdown-item">
-                          Rays
-                        </a><a href="#" class="dropdown-item">
-                          Red Sox
-                        </a><a href="#" class="dropdown-item">
-                          Reds
-                        </a><a href="#" class="dropdown-item">
-                          Rockies
-                        </a><a href="#" class="dropdown-item">
-                          Royals
-                        </a><a href="#" class="dropdown-item">
-                          Tigers
-                        </a><a href="#" class="dropdown-item">
-                          Twins
-                        </a><a href="#" class="dropdown-item">
-                          White Sox
-                        </a><a href="#" class="dropdown-item">
-                          Yankees
-                        </a>
-                  
-                </div>
+  <body>
+    <header>
+      <!--navbar-->
+      <nav
+        class="navbar is-transparent has-background-link-dark"
+        role="navigation"
+        aria-label="main navigation"
+      >
+        <div class="navbar-brand">
+          <a class="navbar-item">
+            <img
+              src="./images/logo.jpg"
+              alt="HOMR logo"
+              style="max-height: 100px"
+              class="p-2"
+            />
+          </a>
+        </div>
+        <!--  show content in mobile devices using is-active class-->
+        <div class="navbar-menu is-active" id="nav-links">
+          <div class="navbar-start">
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link has-text-white navbar-tags mx-4"> Teams </a>
+              <div class="navbar-dropdown" id="dropdown-menu4" role="menu">
+                <a href="#" class="navbar-item">Angles</a>
+                <a href="#" class="navbar-item">Astros</a>
+                <a href="#" class="navbar-item">Athletics</a>
+                <a href="#" class="navbar-item">Braves</a>
+                <a href="#" class="navbar-item">Brewers</a>
+                <a href="#" class="navbar-item">Cardinals</a>
+                <a href="#" class="navbar-item">Cubs</a>
+                <a href="#" class="navbar-item">Diamondbacks</a>
+                <a href="#" class="navbar-item">Dodgers</a>
+                <a href="#" class="navbar-item">Giants</a>
+                <a href="#" class="navbar-item">Indians</a>
+                <a href="#" class="navbar-item">Blue Jays</a>
+                <a href="#" class="navbar-item">Mariners</a>
+                <a href="#" class="navbar-item"> Marlins</a>
+                <a href="#" class="navbar-item">Mets</a>
+                <a href="#" class="navbar-item">Nationals</a>
+                <a href="#" class="navbar-item">Orioles</a>
+                <a href="#" class="navbar-item">Padres</a>
+                <a href="#" class="navbar-item">Phillies</a>
+                <a href="#" class="navbar-item">Pirates</a>
+                <a href="#" class="navbar-item">Rangers</a>
+                <a href="#" class="navbar-item">Rays</a>
+                <a href="#" class="navbar-item">Red Sox </a>
+                <a href="#" class="navbar-item">Reds</a>
+                <a href="#" class="navbar-item">Rockies </a>
+                <a href="#" class="navbar-item">Royals</a>
+                <a href="#" class="navbar-item">Tigers</a>
+                <a href="#" class="navbar-item">Twins</a>
+                <a href="#" class="navbar-item">White Sox</a>
+                <a href="#" class="navbar-item">Yankees</a>
               </div>
-              <a class="navbar-item">
-                Schedule
-              </a>
-              <a class="navbar-item">
-                Game
-              </a>
             </div>
+            <a class="navbar-item has-text-white navbar-tags mx-5">
+              Schedule
+            </a>
+            <a class="navbar-item has-text-white navbar-tags mx-5"> Tickets </a>
+            <a class="navbar-item has-text-white navbar-tags mx-5"> Uber </a>
           </div>
         </div>
       </nav>
+
+    </header>
+    <div class="column">main content here</div>
     </section>
     <div class="chart-container" style="position: relative; height:40vh; width:80vw">
       <canvas id="chart"></canvas>
   </div>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script type='text/javascript' src='./assets/js/teams.js'></script>
-    <script type='text/javascript' src='./assets/js/config.js'></script>
-    <script type='text/javascript' src='./assets/js/apis.js'></script>
-    
+    <script type="text/javascript" src="./assets/js/teams.js"></script>
+    <script type="text/javascript" src="./assets/js/config.js"></script>
+    <script type="text/javascript" src="./assets/js/apis.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
