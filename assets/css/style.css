@@ -9,10 +9,31 @@ h1.title {
 }
 
 .navbar-item.has-dropdown:hover .navbar-link {
-  background-color: #3850b7;
+  /*background-color: #3850b7;*/
+}
+
+.navbar-link:not(.is-arrowless)::after {
+  border-color: white;
+}
+
+@media screen and (max-width: 1023px) {
+  .navbar-link:not(.is-arrowless)::after {
+    border-color: white !important;
+  }
+  a.has-text-white:focus,
+  a.has-text-white:hover {
+    color: #e6e6e6 !important;
+    background-color: #3850b7;
+  }
 }
 
 .navbar-tags {
   font-size: 20px;
+  margin-top: 2rem;
+  background-color: #3850b7;
+}
+
+a.navbar-burger {
+  color: white;
   margin-top: 2rem;
 }

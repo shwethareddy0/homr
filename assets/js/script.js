@@ -70,7 +70,7 @@ function renderGame(game) {
   var titleEl = $('<h3 class="game-title"></h3>');
   var awayTeam = findAwayTeam(game.awayTeam);
   titleEl.text(team + " vs. " + awayTeam); // change based on how game element is constructed
-  
+
   var dateEl = $('<p class="date"></p>');
   dateEl.text("date: " + game.gameDay);
   var timeEl = $('<p class="time"></p>');
@@ -88,7 +88,7 @@ function renderGame(game) {
 }
 
 function findAwayTeam(awayTeam) {
-  for(var i = 0; i < mlbTeams.length; i++) {
+  for (var i = 0; i < mlbTeams.length; i++) {
     if (mlbTeams[i].teamKey === awayTeam) {
       return mlbTeams[i].teamName;
     }
@@ -150,12 +150,12 @@ function saveGamesIntoStorage() {
 loadGamesFromStorage();
 renderGames();
 
-$('.dropdown-item').on('click', function () {
-  var team  = $(this).text().trim();
-  var nextpage = './team-search-page.html#' + team;
+$(".dropdown-item").on("click", function () {
+  var team = $(this).text().trim();
+  var nextpage = "./team-search-page.html#" + team;
   console.log(nextpage);
   location.replace(nextpage);
-})
+});
 
 // .saveBtn is name of button for saving specific game. change based on name of button
 scheduleEl.on("click", ".saveBtn", saveGamesIntoStorage);
