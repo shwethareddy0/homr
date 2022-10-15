@@ -354,7 +354,7 @@ async function mlbSchedule(seasonYear) {
                          gameDay: game.DateTime.split('T')[0],
                          gameTime: game.DateTime.split('T')[1],
                          awayTeam: game.AwayTeam,
-                         homeTeam: game.HomeTeamk,
+                         homeTeam: game.HomeTeam,
                          channel: game.Channel,
                          gameID: game.GameID
                     })
