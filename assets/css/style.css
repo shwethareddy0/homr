@@ -8,10 +8,6 @@ h1.title {
   font-size: 100px;
 }
 
-.navbar-item.has-dropdown:hover .navbar-link {
-  /*background-color: #3850b7;*/
-}
-
 .navbar-link:not(.is-arrowless)::after {
   border-color: white;
 }
@@ -29,11 +25,6 @@ h1.title {
 
 .navbar-tags {
   font-size: 20px;
-  margin-top: 2rem;
+  margin-top: 1rem;
   background-color: #3850b7;
-}
-
-a.navbar-burger {
-  color: white;
-  margin-top: 2rem;
 }

@@ -1,3 +1,10 @@
+//navbar-dropdown collapse on page load
+$(".navbar-item.has-dropdown").children().children().toggle();
+//navbar-dropdown display navbar-items on click
+$(".navbar-item.has-dropdown").click(function () {
+  $(this).children().children().toggle();
+});
+
 var mlbSchedule = [
   {
     // Test purposes only
