@@ -3,4 +3,7 @@ body {
   height: 100%;
 }
 
-/
+h1.title {
+  font-weight: bolder;
+  font-size: 150px;
+}
