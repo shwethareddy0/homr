@@ -3,29 +3,7 @@ var seasonyear = new Date().getFullYear();
 var gamewins = [];
 var gamelosses = [];
 var cities = [];
-var mlbSchedule = [
-  {
-    // Test purposes only
-    hometeam: "Warriors",
-    opposing: "Lakers",
-    date: "11/20/2022",
-    time: "11:00 AM",
-  },
-  {
-    // Test purposes only
-    hometeam: "Warriors",
-    opposing: "Lakers",
-    date: "11/20/2022",
-    time: "11:00 AM",
-  },
-  {
-    // Test purposes only
-    hometeam: "Warriors",
-    opposing: "Lakers",
-    date: "11/20/2022",
-    time: "11:00 AM",
-  },
-]; // Temporary test variable for upcoming games
+var mlbSchedule = []; // Temporary test variable for upcoming games
 
 var game = {
   // Test purposes only
@@ -116,7 +94,7 @@ async function mlbGetStandings() {
 }
 
 function renderGames() {
-  team = document.location.href.split("?")[1];
+  team = document.location.href.split("#")[1];
   teamEl.text(team);
   if (mlbSchedule.length === 0) {
     scheduleHeaderEl.text("No upcoming games.");
@@ -128,48 +106,71 @@ function renderGames() {
     return;
   }
 
-  renderMainGame(mlbSchedule[0]);
+  var teamKey = findTeamCode();
+  console.log(team + "'s key: " + teamKey);
 
-  scheduleHeaderEl.text(team + "'s Upcoming Games"); // Change variable name of team if needed
+  for (var i = 0; i < mlbSchedule.length; i++) {
 
-  if (mlbSchedule.length === 1) {
-    scheduleHeaderEl.text("No upcoming more games.");
-
-    return;
-  }
-
-  for (var i = 1; i < 3; i++) {
-    renderGame(mlbSchedule[i]);
+    if (teamKey === mlbSchedule[i].homeTeam) {
+      console.log("home game");
+      renderGame(mlbSchedule[i], "Home");
+    } else if (teamKey === mlbSchedule[i].awayTeam) {
+      console.log("away game");
+      renderGame(mlbSchedule[i], "Away");
+    }
+    
   }
 }
 
-function renderGame(game) {
+function renderGame(game, homeAway) {
   var gameEl = $('<div class="game"></div>');
   var titleEl = $('<h3 class="game-title"></h3>');
-  var awayTeam = findAwayTeam(game.awayTeam);
-  titleEl.text(team + " vs. " + awayTeam); // change based on how game element is constructed
+  var homeAwayEl = $('<p class="game-awayHome"></p>');
+  var opposingTeam = "";
+  if (homeAway === "Home") {
+    opposingTeam = findOpposingTeam(game.awayTeam);
+    titleEl.text(team + " vs. " + opposingTeam);
+    homeAwayEl.text("Away or Home game? " + homeAway);
+  } else {
+    opposingTeam = findOpposingTeam(game.homeTeam);
+    titleEl.text(opposingTeam + " vs. " + team);
+  }
 
-  var dateEl = $('<p class="date"></p>');
-  dateEl.text("date: " + game.gameDay);
-  var timeEl = $('<p class="time"></p>');
-  timeEl.text("time: " + game.gameTime);
+  var gameStatusEl = $('<p class="game-status"></p>');
+  gameStatusEl.text("Game status: " + game.gameStatus);
+
+  // NO DATA FOR DATE AND TIME
+  // var dateEl = $('<p class="date"></p>');
+  // dateEl.text("date: " + game.gameDay);
+  // var timeEl = $('<p class="time"></p>');
+  // timeEl.text("time: " + game.gameTime);
 
   var saveBtnEl = $(
     '<button class="saveBtn button is-success is-outlined">Save</button>'
   );
 
   gameEl.append(titleEl);
-  gameEl.append(dateEl);
-  gameEl.append(timeEl);
+  // gameEl.append(dateEl);
+  // gameEl.append(timeEl);
+  gameEl.append(homeAwayEl);
+  gameEl.append(gameStatusEl);
   gameEl.append(saveBtnEl);
   scheduleEl.append(gameEl);
 }
 
-function findAwayTeam(awayTeam) {
-  for (var i = 0; i < mlbTeams.length; i++) {
-    if (mlbTeams[i].teamKey === awayTeam) {
-      return mlbTeams[i].teamName;
+function findOpposingTeam(opposingTeam) {
+  var keys = Object.keys(mlbTeams);
+  for (var i = 0; i < keys.length; i++) {
+    if (mlbTeams[keys[i]].teamKey === opposingTeam) {
+      return keys[i];
     }
+  }
+  return "invalid team";
+}
+
+function findTeamCode() {
+  if (mlbTeams[team].teamKey) {
+    return mlbTeams[team].teamKey
   }
   return "invalid team";
 }
@@ -177,7 +178,7 @@ function findAwayTeam(awayTeam) {
 function renderMainGame(game) {
   var gameEl = $('<div class="main-game"></div>');
   var titleEl = $('<h1 class="main-title"></h1>');
-  var awayTeam = findAwayTeam(game.awayTeam);
+  var awayTeam = findOpposingTeam(game.awayTeam);
   titleEl.text(team + " vs. " + awayTeam); // change based on how game element is constructed
 
   var dateEl = $('<p class="main-date"></p>');
@@ -225,15 +226,15 @@ function saveGamesIntoStorage() {
   localStorage.setItem("saved games", JSON.stringify(savedGames));
 }
 
-loadGamesFromStorage();
-renderGames();
-
 $(".dropdown-item").on("click", function () {
   var team = $(this).text().trim();
   var nextpage = "./team-search-page.html#" + team;
   console.log(nextpage);
   location.replace(nextpage);
 });
+
+loadGamesFromStorage();
+renderGames();
 
 // .saveBtn is name of button for saving specific game. change based on name of button
 scheduleEl.on("click", ".saveBtn", saveGamesIntoStorage);
