@@ -1,8 +1,8 @@
 //Used for chart generation
-var seasonyear=new Date().getFullYear();
-var gamewins=[];
-var gamelosses=[];
-var cities=[];
+var seasonyear = new Date().getFullYear();
+var gamewins = [];
+var gamelosses = [];
+var cities = [];
 var mlbSchedule = [
   {
     // Test purposes only
@@ -42,7 +42,6 @@ var scheduleEl = $("#schedule");
 var scheduleHeaderEl = $("#schedule-header");
 var eventdayEl = $("#eventday");
 
-
 //navbar-dropdown collapse on page load
 $(".navbar-item.has-dropdown").children().children().toggle();
 
@@ -51,12 +50,13 @@ $(".navbar-item.has-dropdown").click(function () {
   $(this).children().children().toggle();
 });
 
-mlbGetStandings();
+// mlbGetStandings();
 
 async function mlbGetStandings() {
-    
-  var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Standings/'+seasonyear+'?key=ae5378a25a0f4bafb84e143f07a44618';
-
+  var apiURL =
+    "https://api.sportsdata.io/v3/mlb/scores/json/Standings/" +
+    seasonyear +
+    "?key=ae5378a25a0f4bafb84e143f07a44618";
 
   fetch(apiURL)
       .then(function (response) {
@@ -110,10 +110,11 @@ async function mlbGetStandings() {
               }    
           })    
       })
+
 }
 
 function renderGames() {
-  team = document.location.href.split("#")[1];
+  team = document.location.href.split("?")[1];
   teamEl.text(team);
   if (mlbSchedule.length === 0) {
     scheduleHeaderEl.text("No upcoming games.");

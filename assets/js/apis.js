@@ -1,6 +1,12 @@
 //Gets all games of the season
 //takes in parameter season year: year of the desired season
 //console.log all nba regular season games of that season
+var config = {
+    nbaKey: '9015b39ae19740d183e333ceb61d0aef',
+    tmApi: 'eIRSCBitHabyuXyEKHIK5lpdn1fGWorx',
+    mlbKey: '082724269f274dcb8ec595593f5954a6'
+}
+
 var nbaApiKey = config.nbaKey;
 async function nbaGetSeasonGames(seasonYear) {
 
@@ -203,51 +209,7 @@ function getTicketMaster(sport) {
 }
 
 
-// uses ticketmaster api
-// can access: game name, game date, ticket url, venue name;
-async function getNextGameTickets(team, league) {
 
-    var apiURL = 'https://app.ticketmaster.com/discovery/v2/events.json?keyword=' + team + '&sort=date,asc&apikey=' + tmKey;
-
-    fetch(apiURL)
-        .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    let allEvents = data['_embedded'].events;
-                    console.log(allEvents);
-                    allEvents.forEach(game => {
-                        if (game.promoter) {
-                            let gamePromoters = game.promoter.name.split(' ');
-                            // console.log(gamePromoters)
-
-                            if (gamePromoters.includes(league.toUpperCase())) {
-                                let gameDate = game.dates.start.localDate;
-                                let gameName = game.name;
-                                let gameVenue = game._embedded.venues[0].name;
-                                let ticketUrl = game.url
-
-                                console.log(gameDate);
-                                console.log(gameName);
-                                console.log(gameVenue);
-                                console.log(ticketUrl);
-
-                            }
-
-                        }
-                    });
-                    // console.log()
-                });
-            } else {
-                console.log('error: ' + response.statusText);
-            }
-        })
-        .catch(function (error) {
-            console.log('unable to connect to api link');
-        });
-}
-
-
-// getNextGameTickets('dodgers', 'mlb')
 
 //function to get the last game score of a certain team
 // parameters are: league name, year of the season, name of team
@@ -349,14 +311,17 @@ async function mlbSchedule(seasonYear) {
             //game necessary info from response 
             var scheduleInfo = []
             data.forEach(game => {
+
                 if (game.Status === 'Scheduled' || game.Status === 'Postponed') {
+                    console.log(game);
                     scheduleInfo.push({
-                         gameDay: game.DateTime.split('T')[0],
-                         gameTime: game.DateTime.split('T')[1],
-                         awayTeam: game.AwayTeam,
-                         homeTeam: game.HomeTeamk,
-                         channel: game.Channel,
-                         gameID: game.GameID
+                        gameStatus: game.Status,
+                        gameDay: game.DateTime.split('T')[0],
+                        gameTime: game.DateTime.split('T')[1],
+                        awayTeam: game.AwayTeam,
+                        homeTeam: game.HomeTeam,
+                        channel: game.Channel,
+                        gameID: game.GameID
                     })
                 }
             })
@@ -369,9 +334,13 @@ async function mlbSchedule(seasonYear) {
             console.log('unable to connect to api link')
         })
 }
+
+mlbSchedule('2022POST')
+
+
 //api function call to get the standings for the year
 async function nbaGetStandings() {
-    
+
     var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Standings/2022?key=ae5378a25a0f4bafb84e143f07a44618';
 
 
@@ -380,21 +349,21 @@ async function nbaGetStandings() {
             if (response.ok) {
                 response.json().then(function (data) {
                     console.log(data);
-                    var gamewinS=[];
-                    var gamelosses=[];
-                    for(i=0;i<=data.length;i++){
+                    var gamewinS = [];
+                    var gamelosses = [];
+                    for (i = 0; i <= data.length; i++) {
                         //home+away=total
                         console.log(data[i].AwayWins);
-                        console.log(data[i].HomeWins); 
+                        console.log(data[i].HomeWins);
                         console.log(data[i].AwayLosses);
                         console.log(data[i].HomeLosses);
-                        var totalwins=data[i].AwayWins+data[i].HomeWins;
-                        var totalLoss=data[i].AwayLosses+data[i].HomeLosses;
+                        var totalwins = data[i].AwayWins + data[i].HomeWins;
+                        var totalLoss = data[i].AwayLosses + data[i].HomeLosses;
                         console.log(totalwins);
                         console.log(totalLoss);
 
                     }
-                      
+
                 });
             } else {
                 console.log('error: ' + response.statusText);
@@ -405,7 +374,7 @@ async function nbaGetStandings() {
         });
 
 }
-mlbSchedule('2022POST')
+
 
 
 // mlbGetLastGameScore('mlb', 2021, 'giants')
@@ -439,4 +408,4 @@ function travelTime(end_lat, end_long) {
         })
 }
 
-travelTime(37.7749, -122.4194);
+// travelTime(37.7749, -122.4194);
