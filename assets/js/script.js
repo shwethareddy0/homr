@@ -3,7 +3,6 @@ var seasonyear=new Date().getFullYear();
 var gamewins=[];
 var gamelosses=[];
 var cities=[];
-
 var mlbSchedule = [
   {
     // Test purposes only
@@ -81,18 +80,6 @@ async function mlbGetStandings() {
               //console.log(totalLoss);
 
           }
-          var tx=document.getElementById('chartloss').getContext('2d');
-            new Chart(tx,{
-                type: 'bar',
-                data:{
-                    labels:cities,
-                    datasets:[{
-                        label:'Total Losses by Team',
-                        data: gamelosses,
-            
-                    }],   
-                }    
-            })    
         })
       .then(function () {
 
@@ -102,14 +89,26 @@ async function mlbGetStandings() {
               data:{
                   labels:cities,
                   datasets:[{
-                      label:'Total Wins',
+                      label:'Total Wins by Team',
                       data: gamewins,
           
                   }]
           
               }
+              
           })
+          var tx=document.getElementById('chartloss').getContext('2d');
+          new Chart(tx,{
+              type: 'bar',
+              data:{
+                  labels:cities,
+                  datasets:[{
+                      label:'Total Losses by Team',
+                      data: gamelosses,
           
+                  }],   
+              }    
+          })    
       })
 }
 
