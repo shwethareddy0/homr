@@ -59,55 +59,58 @@ async function mlbGetStandings() {
     "?key=ae5378a25a0f4bafb84e143f07a44618";
 
   fetch(apiURL)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      gamewins = [];
-      gamelosses = [];
-      for (i = 0; i < data.length; i++) {
-        //home+away=total
+      .then(function (response) {
+          return response.json();
+      })
+      .then(function (data) {
+          console.log(data);
+          gamewins=[];
+          gamelosses=[];
+          for(i=0; i < data.length;i++){
+              //home+away=total
 
-        var totalwins = data[i].AwayWins + data[i].HomeWins;
-        var totalLoss = data[i].AwayLosses + data[i].HomeLosses;
-        var city = data[i].City;
+              var totalwins=data[i].AwayWins+data[i].HomeWins;
+              var totalLoss=data[i].AwayLosses+data[i].HomeLosses;
+              var city=data[i].Name;
 
-        gamewins.push(totalwins);
-        gamelosses.push(totalLoss);
-        cities.push(city);
-        //console.log(totalwins);
-        //console.log(totalLoss);
-      }
-    })
-    .then(function () {
-      var ctx = document.getElementById("chart").getContext("2d");
-      new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: cities,
-          datasets: [
-            {
-              label: "Total Wins by Team",
-              data: gamewins,
-            },
-          ],
-        },
-      });
-      var tx = document.getElementById("chartloss").getContext("2d");
-      new Chart(tx, {
-        type: "bar",
-        data: {
-          labels: cities,
-          datasets: [
-            {
-              label: "Total Losses by Team",
-              data: gamelosses,
-            },
-          ],
-        },
-      });
-    });
+              gamewins.push(totalwins);
+              gamelosses.push(totalLoss);
+              cities.push(city);
+              //console.log(totalwins);
+              //console.log(totalLoss);
+
+          }
+        })
+      .then(function () {
+
+          var ctx=document.getElementById('chart').getContext('2d');
+          new Chart(ctx,{
+              type: 'bar',
+              data:{
+                  labels:cities,
+                  datasets:[{
+                      label:'Total Wins by Team',
+                      data: gamewins,
+          
+                  }]
+          
+              }
+              
+          })
+          var tx=document.getElementById('chartloss').getContext('2d');
+          new Chart(tx,{
+              type: 'bar',
+              data:{
+                  labels:cities,
+                  datasets:[{
+                      label:'Total Losses by Team',
+                      data: gamelosses,
+          
+                  }],   
+              }    
+          })    
+      })
+
 }
 
 function renderGames() {
