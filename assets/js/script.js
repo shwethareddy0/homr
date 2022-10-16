@@ -40,14 +40,27 @@ async function mlbGetStandings() {
               data:{
                   labels:cities,
                   datasets:[{
-                      label:'Total Wins',
+                      label:'Total Wins by Team',
                       data: gamewins,
           
                   }]
           
               }
           })
-          
+        
+          var tx=document.getElementById('chartloss').getContext('2d');
+            new Chart(tx,{
+                type: 'bar',
+                data:{
+                    labels:cities,
+                    datasets:[{
+                        label:'Total Losses by Team',
+                        data: gamelosses,
+            
+                    }],   
+                }    
+            })    
+
       })
 }
 var mlbSchedule = [
