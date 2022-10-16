@@ -92,7 +92,7 @@ getNextGameTickets(document.location.href.split('#')[1], 'preseason')
 
 
 function renderLogo(teamName) {
-    var mainDivEl = $('.block');
+    var mainDivEl = $('#maindiv');
     mainDivEl.css('background', "url(" + mlbTeams[teamName].logo + ") no-repeat");
     mainDivEl.css('background-position', 'center');
     mainDivEl.css('background-size', '100%');
