@@ -50,7 +50,7 @@ $(".navbar-item.has-dropdown").click(function () {
   $(this).children().children().toggle();
 });
 
-// mlbGetStandings();
+mlbGetStandings();
 
 async function mlbGetStandings() {
   var apiURL =
@@ -91,6 +91,7 @@ async function mlbGetStandings() {
                   datasets:[{
                       label:'Total Wins by Team',
                       data: gamewins,
+                      backgroundColor: 'rgb(75, 192, 192)'
           
                   }]
           
@@ -105,6 +106,7 @@ async function mlbGetStandings() {
                   datasets:[{
                       label:'Total Losses by Team',
                       data: gamelosses,
+                      backgroundColor:'rgb(255, 99, 132)'
           
                   }],   
               }    
