@@ -299,43 +299,41 @@ async function nbaGetTeamIds(teamName) {
 // 2022POST for 2022 playoffs
 // 2022PRE for preseason
 // can store information in local storage
-async function mlbSchedule(seasonYear) {
-    var aprURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Games/' + seasonYear + '?key=' + config.mlbKey;
+function mlbSchedule(seasonYear) {
+    var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Games/' + seasonYear + '?key=' + config.mlbKey;
 
-    fetch(aprURL).then(response => {
+    console.log(apiURL);
+    fetch(apiURL).then(response => {
         if (response.ok) {
-            return response.json();
+            response.json().then(data => {
+                var scheduleInfo = [];
+                data.forEach(game => {
+                    if (game.Status === 'Scheduled' || game.Status === 'Postponed') {
+                        // console.log(game.DateTime);
+                        scheduleInfo.push({
+                            gameStatus: game.Status,
+                            gameDay: game.DateTime,
+                            gameTime: game.DateTime,
+                            awayTeam: game.AwayTeam,
+                            homeTeam: game.HomeTeam,
+                            channel: game.Channel,
+                            gameID: game.GameID
+                        })
+                    }
+                })
+
+                // access scheduleInfo here to build dynamic html
+                console.log(scheduleInfo);
+                localStorage.setItem('mlbSchedule', JSON.stringify(scheduleInfo));
+            })
         }
     })
-        .then(data => {
-            //game necessary info from response 
-            var scheduleInfo = []
-            data.forEach(game => {
-
-                if (game.Status === 'Scheduled' || game.Status === 'Postponed') {
-                    console.log(game);
-                    scheduleInfo.push({
-                        gameStatus: game.Status,
-                        gameDay: game.DateTime.split('T')[0],
-                        gameTime: game.DateTime.split('T')[1],
-                        awayTeam: game.AwayTeam,
-                        homeTeam: game.HomeTeam,
-                        channel: game.Channel,
-                        gameID: game.GameID
-                    })
-                }
-            })
-
-            // access scheduleInfo here to build dynamic html
-            console.log(scheduleInfo);
-            localStorage.setItem('mlbSchedule', JSON.stringify(scheduleInfo));
-        })
         .catch(error => {
             console.log('unable to connect to api link')
         })
 }
 
-// mlbSchedule('2022POST')
+mlbSchedule('2023');
 
 
 //api function call to get the standings for the year
