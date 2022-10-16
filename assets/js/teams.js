@@ -18,7 +18,7 @@ var mlbTeams = [
     {
         "teamID": 3,
         "city": "Toronto",
-        "teamName": "Blue Jays",
+        "teamName": "Blue_Jays",
         "teamKey": "TOR",
         "league": "AL",
         "division": "East"
