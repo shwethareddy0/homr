@@ -1,8 +1,8 @@
 //Used for chart generation
-var seasonyear=new Date().getFullYear();
-var gamewins=[];
-var gamelosses=[];
-var cities=[];
+var seasonyear = new Date().getFullYear();
+var gamewins = [];
+var gamelosses = [];
+var cities = [];
 
 var mlbSchedule = [
   {
@@ -43,7 +43,6 @@ var scheduleEl = $("#schedule");
 var scheduleHeaderEl = $("#schedule-header");
 var eventdayEl = $("#eventday");
 
-
 //navbar-dropdown collapse on page load
 $(".navbar-item.has-dropdown").children().children().toggle();
 
@@ -55,54 +54,52 @@ $(".navbar-item.has-dropdown").click(function () {
 mlbGetStandings();
 
 async function mlbGetStandings() {
-    
-  var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Standings/'+seasonyear+'?key=ae5378a25a0f4bafb84e143f07a44618';
-
+  var apiURL =
+    "https://api.sportsdata.io/v3/mlb/scores/json/Standings/" +
+    seasonyear +
+    "?key=ae5378a25a0f4bafb84e143f07a44618";
 
   fetch(apiURL)
-      .then(function (response) {
-          return response.json();
-      })
-      .then(function (data) {
-          console.log(data);
-          gamewins=[];
-          gamelosses=[];
-          for(i=0; i < data.length;i++){
-              //home+away=total
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      gamewins = [];
+      gamelosses = [];
+      for (i = 0; i < data.length; i++) {
+        //home+away=total
 
-              var totalwins=data[i].AwayWins+data[i].HomeWins;
-              var totalLoss=data[i].AwayLosses+data[i].HomeLosses;
-              var city=data[i].City;
+        var totalwins = data[i].AwayWins + data[i].HomeWins;
+        var totalLoss = data[i].AwayLosses + data[i].HomeLosses;
+        var city = data[i].City;
 
-              gamewins.push(totalwins);
-              gamelosses.push(totalLoss);
-              cities.push(city);
-              //console.log(totalwins);
-              //console.log(totalLoss);
-
-          }
-        })
-      .then(function () {
-
-          var ctx=document.getElementById('chart').getContext('2d');
-          new Chart(ctx,{
-              type: 'bar',
-              data:{
-                  labels:cities,
-                  datasets:[{
-                      label:'Total Wins',
-                      data: gamewins,
-          
-                  }]
-          
-              }
-          })
-          
-      })
+        gamewins.push(totalwins);
+        gamelosses.push(totalLoss);
+        cities.push(city);
+        //console.log(totalwins);
+        //console.log(totalLoss);
+      }
+    })
+    .then(function () {
+      var ctx = document.getElementById("chart").getContext("2d");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: cities,
+          datasets: [
+            {
+              label: "Total Wins",
+              data: gamewins,
+            },
+          ],
+        },
+      });
+    });
 }
 
 function renderGames() {
-  team = document.location.href.split("#")[1];
+  team = document.location.href.split("?")[1];
   teamEl.text(team);
   if (mlbSchedule.length === 0) {
     scheduleHeaderEl.text("No upcoming games.");
