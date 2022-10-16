@@ -12,7 +12,7 @@
     <title>Team Search page</title>
   </head>
   <body>
-    <div class="container has-background-link-dark">
+    <div class="container is-fluid has-background-link-dark" style="height: 100%;">
       <!--header-->
       <header>
         <div
@@ -20,17 +20,16 @@
           style="border: 1px solid white; height: 10vh"
           ;
         >
-          <h1 class="title is-1 has-text-white-ter mt-5" id="team">
+          <h1 class="title is-2 has-text-white-ter mt-5" id="team">
             Team Name
           </h1>
         </div>
       </header>
+      <section>
       <!--first row-->
-      <div class="block" style="height: 100vh">
+      <div class="container is-fluid" style="height: 70vh; overflow:scroll">
         <div
-          class="columns is-centered p-4 m-6 is-justify-content-space-between"
-          style="height: 50vh"
-          class="main-container"
+          class="columns is-centered p-2 m-2 main-container"
         >
           <div class="column is-half p-2 m-2" style="border: 1px solid white">
             <div id="eventday">
@@ -38,7 +37,7 @@
             </div>
           </div>
 
-          <div class="column is-half p-2 m-2" style="border: 1px solid white">
+          <div class="column is-half p-2 m-2" style="border: 1px solid white; overflow:scroll">
             <h3>Upcoming Games Schedule</h3>
             <div id="schedule-header"></div>
             <div id="schedule"></div>
@@ -46,39 +45,37 @@
         </div>
         <!--2nd row-->
         <div
-          class="columns is-centered p-4 m-6 is-justify-content-space-between"
-          style="height: 30vh"
-          class="sub-container"
+          class="columns is-centered p-2 m-2 sub-container"
         >
           <div
-            class="column is-half p-2 my-2 mx-3"
+            class="column is-half p-2 m-2"
             style="border: 1px solid white"
             id="ticketinfo"
           >
             <h3>Ticket Information</h3>
           </div>
           <div
-            class="column is-half p-2 my-3 mx-3"
+            class="column is-half p-2 m-2"
             style="border: 1px solid white"
             id="travelinfo"
           >
             <h3>Travel Information</h3>
           </div>
         </div>
+      </section>
         <!--footer-->
-        <footer class="footer has-background-link-dark has-text-white">
+        <footer class="has-background-link-dark has-text-white">
           <div
-            class="content has-text-centered"
+            class="content has-text-centered p-2 my-6"
             style="border: 1px solid white"
           >
-            <p>
-              <b>HOMR</b> by
-
-              <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-              The website content is licensed
+            <p>Copyright &copy 2022 by
+              HOMR.
+              <a href="http://opensource.org/licenses/mit-license.php">Licenced by MIT</a>.
+            
             </p>
             <a
-              class="button is-light is-responsive is-outlined"
+              class="button is-light is-responsive is-outlined mb-2"
               href="./index.html"
               >Back to Home</a
             >
