@@ -113,28 +113,34 @@ function renderGames() {
     return;
   }
 
+  
   var teamKey = findTeamCode();
   console.log(team + "'s key: " + teamKey);
 
-  renderEventSection(mlbSchedule[0]);
+  var currTeamGames = [];
 
   for (var i = 0; i < mlbSchedule.length; i++) {
 
     if (teamKey === mlbSchedule[i].homeTeam) {
-      console.log("home game");
+      currTeamGames.push(mlbSchedule[i]);
       renderGame(mlbSchedule[i], "Home");
     } else if (teamKey === mlbSchedule[i].awayTeam) {
-      console.log("away game");
+      currTeamGames.push(mlbSchedule[i]);
       renderGame(mlbSchedule[i], "Away");
     }
-    
   }
+
+  if (currTeamGames.length !== 0) {
+    renderEventSection(currTeamGames[0]);
+  }
+  
 }
 
 function renderAllGames() {
   teamEl.text("This Season's Games");
+
   renderEventSection(mlbSchedule[0]);
-  
+
   if (mlbSchedule.length === 0) {
     scheduleHeaderEl.text("No upcoming games.");
 
@@ -177,9 +183,9 @@ function renderGame(game, homeAway) {
   // var timeEl = $('<p class="time"></p>');
   // timeEl.text("time: " + game.gameTime);
 
-  var saveBtnEl = $(
-    '<button class="saveBtn button is-success is-outlined">Save</button>'
-  );
+  // var saveBtnEl = $(
+  //   '<button class="saveBtn button is-success is-outlined">Save</button>'
+  // );
 
   gameEl.append(titleEl);
   // gameEl.append(dateEl);
@@ -188,7 +194,7 @@ function renderGame(game, homeAway) {
     gameEl.append(homeAwayEl);
   }
   gameEl.append(gameStatusEl);
-  gameEl.append(saveBtnEl);
+  // gameEl.append(saveBtnEl);
   scheduleEl.append(gameEl);
 }
 
@@ -235,8 +241,21 @@ function renderEventSection(game) {
   gameEl.append(saveBtnEl);
   eventdayEl.append(gameEl);
 
-  console.log("gameEl: ");
-  console.log(gameEl);
+
+  // if (savedGames.length !== 0) {
+  //   renderSavedGames();
+  // }
+}
+
+function renderSavedGames() {
+  var headerEl = $('<h3>Saved Games:</h3>');
+  eventdayEl.append($('<br/>'));
+  eventdayEl.append($('<br/>'));
+  eventdayEl.append(headerEl);
+
+  for (var i = 0; i < savedGames.length; i++) {
+
+  }
 }
 
 // Load tickets:
@@ -247,7 +266,7 @@ function renderEventSection(game) {
 // buyTicketsEl.text("Buy Tickets Now!");
 
 function loadGamesFromStorage() {
-  var savedGamesStringify = localStorage.getItem("saved games");
+  var savedGamesStringify = localStorage.getItem("savedGames");
   if (savedGamesStringify) {
     savedGames = JSON.parse(savedGamesStringify);
   }
@@ -261,11 +280,27 @@ function loadGamesFromStorage() {
 function saveGamesIntoStorage() {
   var game = {};
   var gameChildrenEl = $(this).parent().children(); // Change based on how game element is made
-  game["title"] = gameChildrenEl.eq(0).text();
-  game["date"] = gameChildrenEl.eq(1).text();
-  game["time"] = gameChildrenEl.eq(2).text();
+  for (var i = 0; i < gameChildrenEl.length; i++) {
+    var className = gameChildrenEl.eq(i).attr("class");
+    if (className === "game-title") {
+      game["title"] = gameChildrenEl.eq(i).text();
+    } else if (className === "game-status") {
+      game["status"] = gameChildrenEl.eq(i).text();
+    }
+  }
+  console.log("saved games");
+  console.log(savedGames);
+  console.log("game title");
+  console.log(game.title);
+
+  for (var j = 0; j < savedGames.length; i++) {
+    if (savedGames[j].title === game.title) {
+      return;
+    }
+  }
+  
   savedGames.push(game);
-  localStorage.setItem("saved games", JSON.stringify(savedGames));
+  localStorage.setItem("savedGames", JSON.stringify(savedGames));
 }
 
 $(".dropdown-item").on("click", function () {
@@ -279,5 +314,4 @@ loadGamesFromStorage();
 renderGames();
 
 // .saveBtn is name of button for saving specific game. change based on name of button
-scheduleEl.on("click", ".saveBtn", saveGamesIntoStorage);
-eventdayEl.on("click", ".saveBtn", saveGamesIntoStorage);
+// $(".saveBtn").on("click", saveGamesIntoStorage);
