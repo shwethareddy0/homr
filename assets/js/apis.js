@@ -310,11 +310,23 @@ async function mlbSchedule(seasonYear) {
         .then(data => {
             //game necessary info from response 
             var scheduleInfo = []
+            var prevScheduleInfo = [];
             data.forEach(game => {
 
                 if (game.Status === 'Scheduled' || game.Status === 'Postponed') {
                     console.log(game);
                     scheduleInfo.push({
+                        gameStatus: game.Status,
+                        gameDay: game.DateTime.split('T')[0],
+                        gameTime: game.DateTime.split('T')[1],
+                        awayTeam: game.AwayTeam,
+                        homeTeam: game.HomeTeam,
+                        channel: game.Channel,
+                        gameID: game.GameID
+                    })
+                } else if (game.Status === 'Final') {
+                    console.log(game);
+                    prevScheduleInfo.push({
                         gameStatus: game.Status,
                         gameDay: game.DateTime.split('T')[0],
                         gameTime: game.DateTime.split('T')[1],
@@ -329,6 +341,10 @@ async function mlbSchedule(seasonYear) {
             // access scheduleInfo here to build dynamic html
             console.log(scheduleInfo);
             localStorage.setItem('mlbSchedule', JSON.stringify(scheduleInfo));
+
+            console.log(prevScheduleInfo);
+            localStorage.setItem('prevSchedule', JSON.stringify(prevScheduleInfo));
+
         })
         .catch(error => {
             console.log('unable to connect to api link')
