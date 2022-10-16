@@ -2,7 +2,17 @@
 // can access: game name, game date, ticket url, venue name;
 function getNextGameTickets(team) {
     // console.log(mlbTeams[team].city)
+    
+    var team = team;
+    if (!mlbTeams[team]) {
+        console.log("mlbSchedule element 0");
+        var key = JSON.parse(localStorage.getItem("mlbSchedule"))[0].homeTeam;
+        console.log("team key: " + key);
+        team = findOpposingTeam(key);
+    }
+
     var teamQuery = mlbTeams[team].city + team;
+    
     // for (var i = 0; i < mlbTeams.length; i++) {
     //     if (mlbTeams[i].teamName === team) {
     //         teamQuery = mlbTeams[i].city + team
