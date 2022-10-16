@@ -91,10 +91,12 @@ async function mlbGetStandings() {
                   datasets:[{
                       label:'Total Wins by Team',
                       data: gamewins,
-                      backgroundColor: 'rgb(75, 192, 192)'
+                      backgroundColor: 'rgb(75, 192, 192)',
+                      
           
-                  }]
-          
+                  }],
+                
+                 
               }
               
           })
