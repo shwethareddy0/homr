@@ -114,6 +114,8 @@ function renderGames() {
   var teamKey = findTeamCode();
   console.log(team + "'s key: " + teamKey);
 
+  renderEventSection(mlbSchedule[0]);
+
   for (var i = 0; i < mlbSchedule.length; i++) {
 
     if (teamKey === mlbSchedule[i].homeTeam) {
@@ -129,6 +131,8 @@ function renderGames() {
 
 function renderAllGames() {
   teamEl.text("This Season's Games");
+  renderEventSection(mlbSchedule[0]);
+  
   if (mlbSchedule.length === 0) {
     scheduleHeaderEl.text("No upcoming games.");
 
@@ -203,26 +207,34 @@ function findTeamCode() {
   return "invalid team";
 }
 
-function renderMainGame(game) {
-  var gameEl = $('<div class="main-game"></div>');
-  var titleEl = $('<h1 class="main-title"></h1>');
+function renderEventSection(game) {
+  var gameEl = $('<div class="game"></div>');
+  var titleEl = $('<h3 class="game-title"></h3>');
+  var homeTeam = findOpposingTeam(game.homeTeam);
   var awayTeam = findOpposingTeam(game.awayTeam);
-  titleEl.text(team + " vs. " + awayTeam); // change based on how game element is constructed
+  titleEl.text(homeTeam + " vs. " + awayTeam);
 
-  var dateEl = $('<p class="main-date"></p>');
-  dateEl.text("date: " + game.gameDay);
-  var timeEl = $('<p class="main-time"></p>');
-  timeEl.text("time: " + game.gameTime);
+  var gameStatusEl = $('<p class="game-status"></p>');
+  gameStatusEl.text("Game status: " + game.gameStatus);
+
+  // var dateEl = $('<p class="main-date"></p>');
+  // dateEl.text("date: " + game.gameDay);
+  // var timeEl = $('<p class="main-time"></p>');
+  // timeEl.text("time: " + game.gameTime);
 
   var saveBtnEl = $(
     '<button class="saveBtn button is-success is-outlined">Save</button>'
   );
 
   gameEl.append(titleEl);
-  gameEl.append(dateEl);
-  gameEl.append(timeEl);
+  // gameEl.append(dateEl);
+  // gameEl.append(timeEl);
+  gameEl.append(gameStatusEl);
   gameEl.append(saveBtnEl);
   eventdayEl.append(gameEl);
+
+  console.log("gameEl: ");
+  console.log(gameEl);
 }
 
 // Load tickets:
