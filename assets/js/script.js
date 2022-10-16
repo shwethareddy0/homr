@@ -59,7 +59,19 @@ async function mlbGetStandings() {
             
                     }],   
                 }    
-            })    
+            }) 
+            var tx=document.getElementById('chartloss').getContext('2d');
+            new Chart(tx,{
+                type: 'bar',
+                data:{
+                    labels:cities,
+                    datasets:[{
+                        label:'Total Losses by Team',
+                        data: gamelosses,
+            
+                    }],   
+                }    
+            })       
 
       })
 }
