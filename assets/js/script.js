@@ -51,7 +51,7 @@ $(".navbar-item.has-dropdown").click(function () {
   $(this).children().children().toggle();
 });
 
-mlbGetStandings();
+// mlbGetStandings();
 
 async function mlbGetStandings() {
   var apiURL =
