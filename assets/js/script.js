@@ -71,7 +71,7 @@ async function mlbGetStandings() {
 
               var totalwins=data[i].AwayWins+data[i].HomeWins;
               var totalLoss=data[i].AwayLosses+data[i].HomeLosses;
-              var city=data[i].City;
+              var city=data[i].Name;
 
               gamewins.push(totalwins);
               gamelosses.push(totalLoss);
