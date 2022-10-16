@@ -117,35 +117,48 @@ function renderGames() {
   team = document.location.href.split("?")[1];
   teamEl.text(team);
   if (mlbSchedule.length === 0) {
-    scheduleHeaderEl.text("No upcoming games.");
+    scheduleHeaderEl.text("Season is over.");
 
-    var titleEl = $('<h3 class="game-title"></h3>');
-    titleEl.text(team + " have no games");
-    eventdayEl.append(titleEl);
+    // var titleEl = $('<h3 class="game-title"></h3>');
+    // titleEl.text(team + " have no games");
+    // eventdayEl.append(titleEl);
 
     return;
   }
-
-  renderMainGame(mlbSchedule[0]);
 
   scheduleHeaderEl.text(team + "'s Upcoming Games"); // Change variable name of team if needed
 
-  if (mlbSchedule.length === 1) {
-    scheduleHeaderEl.text("No upcoming more games.");
+  var teamKey = findTeamCode();
 
-    return;
-  }
-
-  for (var i = 1; i < 3; i++) {
-    renderGame(mlbSchedule[i]);
+  for (var i = 0; i < 3; i++) {
+    if (mlbSchedule[i].homeTeam === teamKey) {
+      renderGame(mlbSchedule[i], "home team");
+    } else if (mlbSchedule[i].awayTeam === teamKey) {
+      renderGame(mlbSchedule[i], "away team");
+    }
   }
 }
+
 
 function renderGame(game) {
   var gameEl = $('<div class="game"></div>');
   var titleEl = $('<h3 class="game-title"></h3>');
-  var awayTeam = findAwayTeam(game.awayTeam);
-  titleEl.text(team + " vs. " + awayTeam); // change based on how game element is constructed
+
+  var homeTeam = "";
+  var awayTeam = "";
+  if (awayHome === "home team") {
+    homeTeam = team;
+    var awayTeam = findOpposingTeam(game.awayTeam);
+  } else {
+    awayTeam = team;
+    var homeTeam = findOpposingTeam(game.homeTeam);
+  }
+  
+  titleEl.text(homeTeam + " vs. " + awayTeam); // change based on how game element is constructed
+
+  var awayHomeEl = $('<p class="awayHome"></p>');
+  awayHomeEl.text("away or home: " + awayHome);
+  
 
   var dateEl = $('<p class="date"></p>');
   dateEl.text("date: " + game.gameDay);
@@ -163,11 +176,19 @@ function renderGame(game) {
   scheduleEl.append(gameEl);
 }
 
-function findAwayTeam(awayTeam) {
-  for (var i = 0; i < mlbTeams.length; i++) {
-    if (mlbTeams[i].teamKey === awayTeam) {
-      return mlbTeams[i].teamName;
+function findOpposingTeam(opposingTeam) {
+  mlbTeams.forEach((t) => {
+    if (t.teamKey === opposingTeam) {
+      return t.teamName;
     }
+    return "invalid team";
+  });
+  
+}
+
+function findTeamCode() {
+  if (mlbTeams[team].teamKey) {
+    return mlbTeams[team].teamKey
   }
   return "invalid team";
 }
@@ -227,8 +248,9 @@ loadGamesFromStorage();
 renderGames();
 
 $(".dropdown-item").on("click", function () {
-  var team = $(this).text().trim();
-  var nextpage = "./team-search-page.html#" + team;
+  console.log("clicked dropdown")
+  team = $(this).text().trim();
+  var nextpage = "./team-search-page.html?" + team;
   console.log(nextpage);
   location.replace(nextpage);
 });

@@ -351,7 +351,7 @@ async function mlbSchedule(seasonYear) {
         })
 }
 
-// mlbSchedule('2022POST')
+mlbSchedule('2022POST')
 
 
 //api function call to get the standings for the year
