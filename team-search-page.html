@@ -1,61 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-  <link rel="stylesheet" href="./assets/css/team-search-page.css" />
-  <title>Team Search page</title>
-</head>
-
-<body>
-  <div class="container has-background-link-dark">
-    <!--header-->
-    <header>
-      <div class="container is-fluid" style="border: 1px solid white; height: 10vh" ;>
-        <div clas="notification">
-          <h1 class="title is-1 has-text-white-ter" id="team">Team Name</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/team-search-page.css" />
+    <title>Team Search page</title>
+  </head>
+  <body>
+    <div class="container is-fluid has-background-link-dark" style="height: 100%;">
+      <!--header-->
+      <header>
+        <div
+          class="container is-fluid"
+          style="border: 1px solid white; height: 10vh"
+          ;
+        >
+          <h1 class="title is-2 has-text-white-ter mt-5" id="team">
+            Team Name
+          </h1>
         </div>
+      </header>
+      <section>
+      <!--first row-->
+      <div class="container is-fluid" style="height: 70vh; overflow:scroll">
+        <div
+          class="columns is-centered p-2 m-2 main-container"
+        >
+          <div class="column is-half p-2 m-2" style="border: 1px solid white">
+            <div id="eventday">
+              <h3>Event Day</h3>
+            </div>
+          </div>
+
+          <div class="column is-half p-2 m-2" style="border: 1px solid white; overflow:scroll" id="upcoming-games">
+            <h3>Upcoming Games Schedule</h3>
+            <div id="schedule-header"></div>
+            <div id="schedule"></div>
+          </div>
+        </div>
+        <!--2nd row-->
+        <div
+          class="columns is-centered p-2 m-2 sub-container"
+        >
+          <div
+            class="column is-half p-2 m-2"
+            style="border: 1px solid white"
+            id="ticketinfo"
+          >
+            <h3>Ticket Information</h3>
+          </div>
+          <div
+            class="column is-half p-2 m-2"
+            style="border: 1px solid white"
+            id="travelinfo"
+          >
+            <h3>Travel Information</h3>
+          </div>
+        </div>
+      </section>
+        <!--footer-->
+        <footer class="has-background-link-dark has-text-white">
+          <div
+            class="content has-text-centered p-6 m-6">
+            <p>Copyright &copy; 2022 by
+              HOMR.
+            </p>
+            <a
+              class="button is-light is-responsive is-outlined mt-2"
+              href="./index.html"
+              >Back to Home</a
+            >
+          </div>
+        </footer>
       </div>
-    </header>
-    <!--first row-->
-    <div class="block" style="height: 100vh">
-      <div class="columns is-centered p-4 m-6 is-justify-content-space-between" style="height: 50vh"
-        class="main-container">
-        <div class="column is-half p-2 m-2" style="border: 1px solid white">
-          <div id="eventday"></div>
-        </div>
-
-        <div class="column is-half p-2 m-2" style="border: 1px solid white">
-          <div id="schedule-header"></div>
-          <div id="schedule"></div>
-        </div>
-      </div>
-      <!--2nd row-->
-      <div class="columns is-centered p-4 m-6 is-justify-content-space-between" style="height: 30vh"
-        class="sub-container">
-        <div class="column is-half p-2 my-2 mx-3" style="border: 1px solid white" id="ticketinfo">
-          <p class="bd-notification">ticket info</p>
-        </div>
-        <div class="column is-half p-2 my-3 mx-3" style="border: 1px solid white" id="teamstats">
-          <p class="bd-notification">team stats</p>
-        </div>
-      </div>
-      <!--footer-->
-      <footer class="footer has-background-link-dark has-text-white">
-        <div class="content has-text-centered" style="border: 1px solid white">
-          <p>
-            <b>HOMR</b> by
-
-            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-            The website content is licensed
-          </p>
-          <a class="button is-light is-responsive is-outlined" href="./index.html">Back to Home</a>
-        </div>
-      </footer>
-    </div>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
