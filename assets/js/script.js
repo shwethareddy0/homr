@@ -95,6 +95,11 @@ async function mlbGetStandings() {
 
 function renderGames() {
   team = document.location.href.split("#")[1];
+  if((team === "upcoming-games") || (team === "ticketinfo") || (team === "travelinfo")) {
+    renderAllGames();
+    return;
+  }
+
   teamEl.text(team);
   if (mlbSchedule.length === 0) {
     scheduleHeaderEl.text("No upcoming games.");
@@ -122,6 +127,23 @@ function renderGames() {
   }
 }
 
+function renderAllGames() {
+  teamEl.text("This Season's Games");
+  if (mlbSchedule.length === 0) {
+    scheduleHeaderEl.text("No upcoming games.");
+
+    var titleEl = $('<h3 class="game-title"></h3>');
+    titleEl.text("Season is over");
+    eventdayEl.append(titleEl);
+
+    return;
+  }
+
+  for (var i = 0; i < mlbSchedule.length; i++) {
+    renderGame(mlbSchedule[i], "All")
+  }
+}
+
 function renderGame(game, homeAway) {
   var gameEl = $('<div class="game"></div>');
   var titleEl = $('<h3 class="game-title"></h3>');
@@ -131,9 +153,13 @@ function renderGame(game, homeAway) {
     opposingTeam = findOpposingTeam(game.awayTeam);
     titleEl.text(team + " vs. " + opposingTeam);
     homeAwayEl.text("Away or Home game? " + homeAway);
-  } else {
+  } else if (homeAway === "Away") {
     opposingTeam = findOpposingTeam(game.homeTeam);
     titleEl.text(opposingTeam + " vs. " + team);
+  } else {
+    var homeTeam = findOpposingTeam(game.homeTeam);
+    var awayTeam = findOpposingTeam(game.awayTeam);
+    titleEl.text(homeTeam + " vs. " + awayTeam);
   }
 
   var gameStatusEl = $('<p class="game-status"></p>');
@@ -152,7 +178,9 @@ function renderGame(game, homeAway) {
   gameEl.append(titleEl);
   // gameEl.append(dateEl);
   // gameEl.append(timeEl);
-  gameEl.append(homeAwayEl);
+  if (homeAway !== "All") {
+    gameEl.append(homeAwayEl);
+  }
   gameEl.append(gameStatusEl);
   gameEl.append(saveBtnEl);
   scheduleEl.append(gameEl);
