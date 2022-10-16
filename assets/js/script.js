@@ -111,20 +111,27 @@ function renderGames() {
     return;
   }
 
+  
   var teamKey = findTeamCode();
   console.log(team + "'s key: " + teamKey);
 
-  renderEventSection(mlbSchedule[0]);
+  var currTeamGames = [];
 
   for (var i = 0; i < mlbSchedule.length; i++) {
 
     if (teamKey === mlbSchedule[i].homeTeam) {
+      currTeamGames.push(mlbSchedule[i]);
       renderGame(mlbSchedule[i], "Home");
     } else if (teamKey === mlbSchedule[i].awayTeam) {
+      currTeamGames.push(mlbSchedule[i]);
       renderGame(mlbSchedule[i], "Away");
     }
-    
   }
+
+  if (currTeamGames.length !== 0) {
+    renderEventSection(currTeamGames[0]);
+  }
+  
 }
 
 function renderAllGames() {
@@ -233,9 +240,9 @@ function renderEventSection(game) {
   eventdayEl.append(gameEl);
 
 
-  if (savedGames.length !== 0) {
-    renderSavedGames();
-  }
+  // if (savedGames.length !== 0) {
+  //   renderSavedGames();
+  // }
 }
 
 function renderSavedGames() {
@@ -305,4 +312,4 @@ loadGamesFromStorage();
 renderGames();
 
 // .saveBtn is name of button for saving specific game. change based on name of button
-$(".saveBtn").on("click", saveGamesIntoStorage);
+// $(".saveBtn").on("click", saveGamesIntoStorage);
