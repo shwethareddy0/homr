@@ -3,181 +3,241 @@ var mlbTeams = [
         "teamID": 1,
         "city": "Los Angeles",
         "teamName": "Dodgers",
-        "teamKey": "LAD"
+        "teamKey": "LAD",
+        "league": "NL",
+        "division": "West"
     },
     {
         "teamID": 2,
         "city": "Cincinnati",
         "teamName": "Reds",
-        "teamKey": "CIN"
+        "teamKey": "CIN",
+        "league": "NL",
+        "division": "Central"
     },
     {
         "teamID": 3,
         "city": "Toronto",
         "teamName": "Blue Jays",
-        "teamKey": "TOR"
+        "teamKey": "TOR",
+        "league": "AL",
+        "division": "East"
     },
     {
         "teamID": 4,
         "city": "Pittsburgh",
         "teamName": "Pirates",
-        "teamKey": "PIT"
+        "teamKey": "PIT",
+        "league": "NL",
+        "division": "Central"
     },
     {
         "teamID": 5,
         "city": "Kansas City",
         "teamName": "Royals",
-        "teamKey": "KC"
+        "teamKey": "KC",
+        "league": "AL",
+        "division": "Central"
     },
     {
         "teamID": 9,
         "city": "Chicago",
         "teamName": "Cubs",
-        "teamKey": "CHC"
+        "teamKey": "CHC",
+        "league": "NL",
+        "division": "Central"
     },
     {
         "teamID": 10,
         "city": "Cleveland",
         "teamName": "Guardians",
-        "teamKey": "CLE"
+        "teamKey": "CLE",
+        "league": "AL",
+        "division": "Central"
     },
     {
         "teamID": 11,
         "city": "Tampa Bay",
         "teamName": "Rays",
-        "teamKey": "TB"
+        "teamKey": "TB",
+        "league": "AL",
+        "division": "East"
     },
     {
         "teamID": 12,
         "city": "Philadelphia",
         "teamName": "Phillies",
-        "teamKey": "PHI"
+        "teamKey": "PHI",
+        "league": "NL",
+        "division": "East"
     },
     {
         "teamID": 13,
         "city": "Seattle",
         "teamName": "Mariners",
-        "teamKey": "SEA"
+        "teamKey": "SEA",
+        "league": "AL",
+        "division": "West"
     },
     {
         "teamID": 14,
         "city": "Arizona",
         "teamName": "Diamondbacks",
-        "teamKey": "ARI"
+        "teamKey": "ARI",
+        "league": "NL",
+        "division": "West"
     },
     {
         "teamID": 15,
         "city": "San Francisco",
         "teamName": "Giants",
-        "teamKey": "SF"
+        "teamKey": "SF",
+        "league": "NL",
+        "division": "West"
     },
     {
         "teamID": 16,
         "city": "Chicago",
         "teamName": "White Sox",
-        "teamKey": "CHW"
+        "teamKey": "CHW",
+        "league": "AL",
+        "division": "Central"
     },
     {
         "teamID": 17,
         "city": "Detroit",
         "teamName": "Tigers",
-        "teamKey": "DET"
+        "teamKey": "DET",
+        "league": "AL",
+        "division": "Central"
     },
     {
         "teamID": 18,
         "city": "New York",
         "teamName": "Mets",
-        "teamKey": "NYM"
+        "teamKey": "NYM",
+        "league": "NL",
+        "division": "East"
     },
     {
         "teamID": 19,
         "city": "Baltimore",
         "teamName": "Orioles",
-        "teamKey": "BAL"
+        "teamKey": "BAL",
+        "league": "AL",
+        "division": "East"
     },
     {
         "teamID": 20,
         "city": "Minnesota",
         "teamName": "Twins",
-        "teamKey": "MIN"
+        "teamKey": "MIN",
+        "league": "AL",
+        "division": "Central"
     },
     {
         "teamID": 21,
         "city": "Los Angeles",
         "teamName": "Angels",
-        "teamKey": "LAA"
+        "teamKey": "LAA",
+        "league": "AL",
+        "division": "West"
     },
     {
         "teamID": 22,
         "city": "Miami",
         "teamName": "Marlins",
-        "teamKey": "MIA"
+        "teamKey": "MIA",
+        "league": "NL",
+        "division": "East"
     },
     {
         "teamID": 23,
         "city": "Colorado",
         "teamName": "Rockies",
-        "teamKey": "COL"
+        "teamKey": "COL",
+        "league": "NL",
+        "division": "West"
     },
     {
         "teamID": 24,
         "city": "Oakland",
         "teamName": "Athletics",
-        "teamKey": "OAK"
+        "teamKey": "OAK",
+        "league": "AL",
+        "division": "West"
     },
     {
         "teamID": 25,
         "city": "Boston",
         "teamName": "Red Sox",
-        "teamKey": "BOS"
+        "teamKey": "BOS",
+        "league": "AL",
+        "division": "East"
     },
     {
         "teamID": 26,
         "city": "Atlanta",
         "teamName": "Braves",
-        "teamKey": "ATL"
+        "teamKey": "ATL",
+        "league": "NL",
+        "division": "East"
     },
     {
         "teamID": 28,
         "city": "Texas",
         "teamName": "Rangers",
-        "teamKey": "TEX"
+        "teamKey": "TEX",
+        "league": "AL",
+        "division": "West"
     },
     {
         "teamID": 29,
         "city": "New York",
         "teamName": "Yankees",
-        "teamKey": "NYY"
+        "teamKey": "NYY",
+        "league": "AL",
+        "division": "East"
     },
     {
         "teamID": 30,
         "city": "Houston",
         "teamName": "Astros",
-        "teamKey": "HOU"
+        "teamKey": "HOU",
+        "league": "AL",
+        "division": "West"
     },
     {
         "teamID": 31,
         "city": "St. Louis",
         "teamName": "Cardinals",
-        "teamKey": "STL"
+        "teamKey": "STL",
+        "league": "NL",
+        "division": "Central"
     },
     {
         "teamID": 32,
         "city": "Milwaukee",
         "teamName": "Brewers",
-        "teamKey": "MIL"
+        "teamKey": "MIL",
+        "league": "NL",
+        "division": "Central"
     },
     {
         "teamID": 33,
         "city": "San Diego",
         "teamName": "Padres",
-        "teamKey": "SD"
+        "teamKey": "SD",
+        "league": "NL",
+        "division": "West"
     },
     {
         "teamID": 35,
         "city": "Washington",
         "teamName": "Nationals",
-        "teamKey": "WSH"
+        "teamKey": "WSH",
+        "league": "NL",
+        "division": "East"
     }
 ]
 
@@ -363,3 +423,5 @@ var nbaTeams = [
         "teamKey": "SAC"
     }
 ]
+
+
