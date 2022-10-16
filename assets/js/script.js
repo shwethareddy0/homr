@@ -1,3 +1,8 @@
+//Used for chart generation
+var seasonyear = new Date().getFullYear();
+var gamewins = [];
+var gamelosses = [];
+var cities = [];
 var mlbSchedule = [
   {
     // Test purposes only
@@ -37,8 +42,79 @@ var scheduleEl = $("#schedule");
 var scheduleHeaderEl = $("#schedule-header");
 var eventdayEl = $("#eventday");
 
+//navbar-dropdown collapse on page load
+$(".navbar-item.has-dropdown").children().children().toggle();
+
+//navbar-dropdown display navbar-items on click
+$(".navbar-item.has-dropdown").click(function () {
+  $(this).children().children().toggle();
+});
+
+// mlbGetStandings();
+
+async function mlbGetStandings() {
+  var apiURL =
+    "https://api.sportsdata.io/v3/mlb/scores/json/Standings/" +
+    seasonyear +
+    "?key=ae5378a25a0f4bafb84e143f07a44618";
+
+  fetch(apiURL)
+      .then(function (response) {
+          return response.json();
+      })
+      .then(function (data) {
+          console.log(data);
+          gamewins=[];
+          gamelosses=[];
+          for(i=0; i < data.length;i++){
+              //home+away=total
+
+              var totalwins=data[i].AwayWins+data[i].HomeWins;
+              var totalLoss=data[i].AwayLosses+data[i].HomeLosses;
+              var city=data[i].Name;
+
+              gamewins.push(totalwins);
+              gamelosses.push(totalLoss);
+              cities.push(city);
+              //console.log(totalwins);
+              //console.log(totalLoss);
+
+          }
+        })
+      .then(function () {
+
+          var ctx=document.getElementById('chart').getContext('2d');
+          new Chart(ctx,{
+              type: 'bar',
+              data:{
+                  labels:cities,
+                  datasets:[{
+                      label:'Total Wins by Team',
+                      data: gamewins,
+          
+                  }]
+          
+              }
+              
+          })
+          var tx=document.getElementById('chartloss').getContext('2d');
+          new Chart(tx,{
+              type: 'bar',
+              data:{
+                  labels:cities,
+                  datasets:[{
+                      label:'Total Losses by Team',
+                      data: gamelosses,
+          
+                  }],   
+              }    
+          })    
+      })
+
+}
+
 function renderGames() {
-  team = document.location.href.split("#")[1];
+  team = document.location.href.split("?")[1];
   teamEl.text(team);
   if (mlbSchedule.length === 0) {
     scheduleHeaderEl.text("Season is over.");
@@ -66,6 +142,7 @@ function renderGames() {
 function renderGame(game, awayHome) {
   var gameEl = $('<div class="game"></div>');
   var titleEl = $('<h3 class="game-title"></h3>');
+
   var homeTeam = "";
   var awayTeam = "";
   if (awayHome === "home team") {
@@ -81,6 +158,7 @@ function renderGame(game, awayHome) {
   var awayHomeEl = $('<p class="awayHome"></p>');
   awayHomeEl.text("away or home: " + awayHome);
   
+
   var dateEl = $('<p class="date"></p>');
   dateEl.text("date: " + game.gameDay);
   var timeEl = $('<p class="time"></p>');
@@ -97,9 +175,11 @@ function renderGame(game, awayHome) {
   scheduleEl.append(gameEl);
 }
 
+
 function findOpposingTeam(opposingTeam) {
   for(var i = 0; i < mlbTeams.length; i++) {
     if (mlbTeams[i].teamKey === opposingTeam) {
+
       return mlbTeams[i].teamName;
     }
   }
@@ -170,12 +250,12 @@ function saveGamesIntoStorage() {
 loadGamesFromStorage();
 renderGames();
 
-$('.dropdown-item').on('click', function () {
-  var team  = $(this).text().trim();
-  var nextpage = './team-search-page.html#' + team;
+$(".dropdown-item").on("click", function () {
+  var team = $(this).text().trim();
+  var nextpage = "./team-search-page.html#" + team;
   console.log(nextpage);
   location.replace(nextpage);
-})
+});
 
 // .saveBtn is name of button for saving specific game. change based on name of button
 scheduleEl.on("click", ".saveBtn", saveGamesIntoStorage);
