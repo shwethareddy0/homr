@@ -410,3 +410,33 @@ mlbSchedule('2022POST')
 
 // mlbGetLastGameScore('mlb', 2021, 'giants')
 
+// function to get travel time, asks user to get location info for starting latitude longitude
+// uses moment.js to acquire travel departure time
+// parameters are destination latitude and longitude
+function travelTime(end_lat, end_long) {
+    navigator.geolocation.getCurrentPosition(
+        position => {
+
+
+            apiURL = 'https://api.traveltimeapp.com/v4/time-filter?type=driving&departure_time=' + moment().toISOString() + '&search_lat=' + end_lat + '&search_lng=' + end_long + '&locations=' + position.coords.latitude + '_' + position.coords.longitude + '&app_id=0c93f543&api_key=2535a155d41c0a7803ae5716be3a365a'
+
+            fetch(apiURL)
+                .then(function (response) {
+                    if (response.ok) {
+                        response.json().then(data => {
+                            var travelTimeSecs = data.results[0].locations[0].properties[0].travel_time;
+                            console.log('total travel time: ' + travelTimeSecs)
+
+                        });
+                    } else {
+                        console.log('error: ' + response.statusText);
+                    }
+                })
+                .catch(function (error) {
+                    console.log('unable to connect to api link');
+                });
+
+        })
+}
+
+travelTime(37.7749, -122.4194);
