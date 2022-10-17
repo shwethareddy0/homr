@@ -109,6 +109,7 @@ function renderLogo(teamName) {
 }
 
 renderLogo(document.location.href.split('#')[1]);
+*/
 
 // function to get travel time, asks user to get location info for starting latitude longitude
 // uses moment.js to acquire travel departure time
