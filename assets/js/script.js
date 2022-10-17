@@ -205,7 +205,7 @@ function renderGame(game, homeAway) {
   }
   gameEl.append(gameStatusEl);
   // gameEl.append(saveBtnEl);
-  $("#upcoming-games").append(gameEl);
+  $("#schedule").append(gameEl);
 }
 
 function findOpposingTeam(opposingTeam) {
