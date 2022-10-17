@@ -37,68 +37,75 @@ async function mlbGetStandings() {
     "?key=ae5378a25a0f4bafb84e143f07a44618";
 
   fetch(apiURL)
-      .then(function (response) {
-          return response.json();
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // console.log(data);
+      gamewins = [];
+      gamelosses = [];
+      for (i = 0; i < data.length; i++) {
+        //home+away=total
+
+        var totalwins = data[i].AwayWins + data[i].HomeWins;
+        var totalLoss = data[i].AwayLosses + data[i].HomeLosses;
+        var city = data[i].Name;
+
+        gamewins.push(totalwins);
+        gamelosses.push(totalLoss);
+        cities.push(city);
+        //console.log(totalwins);
+        //console.log(totalLoss);
+
+      }
+    })
+    .then(function () {
+
+      // if no chart is found in the page;
+      if(!document.getElementById('chart')) {
+        return;
+      }
+      var ctx = document.getElementById('chart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: cities,
+          datasets: [{
+            label: 'Total Wins by Team',
+            data: gamewins,
+            backgroundColor: 'rgb(75, 192, 192)',
+
+
+          }],
+
+
+        }
+
       })
-      .then(function (data) {
-          console.log(data);
-          gamewins=[];
-          gamelosses=[];
-          for(i=0; i < data.length;i++){
-              //home+away=total
+      var tx = document.getElementById('chartloss').getContext('2d');
+      new Chart(tx, {
+        type: 'bar',
+        data: {
+          labels: cities,
+          datasets: [{
+            label: 'Total Losses by Team',
+            data: gamelosses,
+            backgroundColor: 'rgb(255, 99, 132)'
 
-              var totalwins=data[i].AwayWins+data[i].HomeWins;
-              var totalLoss=data[i].AwayLosses+data[i].HomeLosses;
-              var city=data[i].Name;
-
-              gamewins.push(totalwins);
-              gamelosses.push(totalLoss);
-              cities.push(city);
-              //console.log(totalwins);
-              //console.log(totalLoss);
-
-          }
-        })
-      .then(function () {
-
-          var ctx=document.getElementById('chart').getContext('2d');
-          new Chart(ctx,{
-              type: 'bar',
-              data:{
-                  labels:cities,
-                  datasets:[{
-                      label:'Total Wins by Team',
-                      data: gamewins,
-                      backgroundColor: 'rgb(75, 192, 192)',
-                      
-          
-                  }],
-                
-                 
-              }
-              
-          })
-          var tx=document.getElementById('chartloss').getContext('2d');
-          new Chart(tx,{
-              type: 'bar',
-              data:{
-                  labels:cities,
-                  datasets:[{
-                      label:'Total Losses by Team',
-                      data: gamelosses,
-                      backgroundColor:'rgb(255, 99, 132)'
-          
-                  }],   
-              }    
-          })    
+          }],
+        }
       })
+    })
 
 }
 
 function renderGames() {
   team = document.location.href.split("#")[1];
-  if((team === "upcoming-games") || (team === "ticketinfo") || (team === "travelinfo")) {
+  if ((team === "upcoming-games") || (team === "ticketinfo") || (team === "travelinfo")) {
     renderAllGames();
+    return;
+  } else if (!team) {
+    console.log('no team')
     return;
   }
 
@@ -113,8 +120,10 @@ function renderGames() {
     return;
   }
 
-  
-  var teamKey = findTeamCode();
+
+  // var teamKey = findTeamCode(team);
+  console.log(mlbTeams[team])
+  var teamKey = mlbTeams[team]['teamKey']
   console.log(team + "'s key: " + teamKey);
 
   var currTeamGames = [];
@@ -133,7 +142,7 @@ function renderGames() {
   if (currTeamGames.length !== 0) {
     renderEventSection(currTeamGames[0]);
   }
-  
+
 }
 
 function renderAllGames() {
@@ -152,7 +161,15 @@ function renderAllGames() {
   }
 
   for (var i = 0; i < mlbSchedule.length; i++) {
+    
+    if (i > 5) {
+      return;
+    }
     renderGame(mlbSchedule[i], "All")
+    
+
+    // we only want to show the next 5 games:
+    
   }
 }
 
@@ -195,7 +212,7 @@ function renderGame(game, homeAway) {
   }
   gameEl.append(gameStatusEl);
   // gameEl.append(saveBtnEl);
-  scheduleEl.append(gameEl);
+  $('#upcoming-games').append(gameEl);
 }
 
 function findOpposingTeam(opposingTeam) {
@@ -208,10 +225,15 @@ function findOpposingTeam(opposingTeam) {
   return "invalid team";
 }
 
-function findTeamCode() {
-  if (mlbTeams[team].teamKey) {
-    return mlbTeams[team].teamKey
-  }
+function findTeamCode(team) {
+  mlbTeams.forEach(team => {
+    if (team.teamName === team) {
+      return
+    }
+  });
+  // if (mlbTeams[team].teamKey) {
+  //   return mlbTeams[team].teamKey
+  // }
   return "invalid team";
 }
 
@@ -298,7 +320,7 @@ function saveGamesIntoStorage() {
       return;
     }
   }
-  
+
   savedGames.push(game);
   localStorage.setItem("savedGames", JSON.stringify(savedGames));
 }
