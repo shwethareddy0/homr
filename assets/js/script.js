@@ -41,7 +41,7 @@ async function mlbGetStandings() {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      // console.log(data);
       gamewins = [];
       gamelosses = [];
       for (i = 0; i < data.length; i++) {
@@ -59,6 +59,10 @@ async function mlbGetStandings() {
       }
     })
     .then(function () {
+      // if no chart is found in the page;
+      if (!document.getElementById("chart")) {
+        return;
+      }
       var ctx = document.getElementById("chart").getContext("2d");
       new Chart(ctx, {
         type: "bar",
@@ -99,6 +103,9 @@ function renderGames() {
   ) {
     renderAllGames();
     return;
+  } else if (!team) {
+    console.log("no team");
+    return;
   }
 
   teamEl.text(team);
@@ -112,7 +119,9 @@ function renderGames() {
     return;
   }
 
-  var teamKey = findTeamCode();
+  // var teamKey = findTeamCode(team);
+  console.log(mlbTeams[team]);
+  var teamKey = mlbTeams[team]["teamKey"];
   console.log(team + "'s key: " + teamKey);
 
   var currTeamGames = [];
@@ -148,7 +157,12 @@ function renderAllGames() {
   }
 
   for (var i = 0; i < mlbSchedule.length; i++) {
+    if (i > 5) {
+      return;
+    }
     renderGame(mlbSchedule[i], "All");
+
+    // we only want to show the next 5 games:
   }
 }
 
@@ -191,7 +205,7 @@ function renderGame(game, homeAway) {
   }
   gameEl.append(gameStatusEl);
   // gameEl.append(saveBtnEl);
-  scheduleEl.append(gameEl);
+  $("#upcoming-games").append(gameEl);
 }
 
 function findOpposingTeam(opposingTeam) {
@@ -204,10 +218,15 @@ function findOpposingTeam(opposingTeam) {
   return "invalid team";
 }
 
-function findTeamCode() {
-  if (mlbTeams[team].teamKey) {
-    return mlbTeams[team].teamKey;
-  }
+function findTeamCode(team) {
+  mlbTeams.forEach((team) => {
+    if (team.teamName === team) {
+      return;
+    }
+  });
+  // if (mlbTeams[team].teamKey) {
+  //   return mlbTeams[team].teamKey
+  // }
   return "invalid team";
 }
 
