@@ -154,8 +154,9 @@ function renderDistance (travelTimeSeconds, teamName) {
         $('#travelinfo').append($('<p>'+parkName+' is too far away from your current location</p>'));
     }
     var travelTimeMins = travelTimeSeconds/60;
+    travelTimeMins = travelTimeMins.toPrecision(3);
     // console.log('you are: ' + travelTimeMins + ' away from ' + mlbTeams[teamName].parkName)
-    $('<p>'+parkName+' is '+ travelTimeMins+' minutes away from your current location</p>');
+    $('#travelinfo').append($('<p>'+parkName+' is '+ travelTimeMins+' minutes away from your current location</p>'));
 }
 
 // travelTime(document.location.href.split('#')[1]);
