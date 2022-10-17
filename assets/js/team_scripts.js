@@ -109,3 +109,58 @@ function renderLogo(teamName) {
 }
 
 renderLogo(document.location.href.split('#')[1]);
+
+// function to get travel time, asks user to get location info for starting latitude longitude
+// uses moment.js to acquire travel departure time
+// parameters are destination latitude and longitude
+function travelTime(teamName) {
+    navigator.geolocation.getCurrentPosition(
+        position => {
+            var end_lat = mlbTeams[teamName].parkLocation[0]
+            var end_long = mlbTeams[teamName].parkLocation[1]
+            console.log(end_lat + ' ' + end_long);
+            apiURL = 'https://api.traveltimeapp.com/v4/time-filter?type=driving&departure_time=' + moment().toISOString() + '&search_lat=' + end_lat + '&search_lng=' + end_long + '&locations=' + position.coords.latitude + '_' + position.coords.longitude + '&app_id=0c93f543&api_key=2535a155d41c0a7803ae5716be3a365a'
+
+            fetch(apiURL)
+                .then(function (response) {
+                    if (response.ok) {
+                        response.json().then(function (data) {
+                            console.log(data);
+                            console.log(data.results[0].unreachable.length);
+                            if (data.results[0].unreachable.length > 0) {
+                                console.log('too far away')
+                                renderDistance('unreachable', teamName)
+                            } else {
+                                var travelTimeSecs = data.results[0].locations[0].properties[0].travel_time;
+                                console.log('total travel time: ' + travelTimeSecs/60)
+                                renderDistance(travelTimeSecs, teamName)
+                            }
+                        });
+                    } else {
+                        console.log('error: ' + response.statusText);
+                    }
+                })
+                .catch(function (error) {
+                    console.log('unable to connect to api link');
+                });
+        })
+}
+
+function renderDistance (travelTimeSeconds, teamName) {
+    var parkName = mlbTeams[teamName].parkName;
+    
+    // console.log(parkName)
+    if(travelTimeSeconds === 'unreachable') {
+        $('#travelinfo').append($('<p>'+parkName+' is too far away from your current location</p>'));
+    }
+    var travelTimeMins = travelTimeSeconds/60;
+    // console.log('you are: ' + travelTimeMins + ' away from ' + mlbTeams[teamName].parkName)
+    $('<p>'+parkName+' is '+ travelTimeMins+' minutes away from your current location</p>');
+}
+
+// travelTime(document.location.href.split('#')[1]);
+
+$('#travelinfo').on('click', function(event) {
+    event.preventDefault();
+    travelTime(document.location.href.split('#')[1]);
+})
