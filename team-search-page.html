@@ -1,74 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/team-search-page.css" />
+    <title>Team Search page</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-  <link rel="stylesheet" href="./assets/css/team-search-page.css" />
-  <title>Team Search page</title>
-</head>
-
-<body>
-  <div id="maindiv" class="container is-fluid p-0" style="height: 100%">
-    <!--header-->
-    <header>
-      <div class="container is-fluid has-background-link-dark" style="height: 10vh">
-        <h1 class="title is-2 has-text-white-ter mt-5" id="team">
-          Team Name
-        </h1>
-      </div>
-    </header>
-    <section>
-      <!--first row-->
-      <div class="container is-fluid" style="height: 70vh; overflow:scroll">
-        <div class="columns is-centered p-2 m-2 main-container">
-          <div class="column is-half p-2 m-2 has-background-link-dark">
-            <div id="eventday">
-              <h3>Next Upcoming Game: </h3>
+  <body>
+    <div id="maindiv" class="container is-fluid p-0" style="height: 100%">
+      <!--header-->
+      <header>
+        <div
+          class="container is-fluid has-background-link-dark"
+          style="height: 10vh"
+        >
+          <h1 class="title is-2 has-text-white-ter mt-5" id="team">
+            Team Name
+          </h1>
+        </div>
+      </header>
+      <section>
+        <!--first row-->
+        <div class="container is-fluid" style="height: 70vh; overflow: scroll">
+          <div class="columns is-centered p-2 m-2 main-container">
+            <!--Next Upcoming Game section-->
+            <div
+              class="column is-half p-2 m-2 has-background-link-dark"
+              style="height: 70vh"
+            >
+              <div id="eventday">
+                <h3>Next Upcoming Game:</h3>
+              </div>
+            </div>
+            <!--Upcoming Game Schedule section-->
+            <div
+              class="column is-half p-2 m-2 has-background-link-dark"
+              id="upcoming-games"
+            >
+              <h3 class="mb-5">Upcoming Games Schedule</h3>
+              <div class="columns">
+                <div class="column" style="max-height: 65vh; overflow: scroll">
+                  <div id="schedule-header"></div>
+                  <div id="schedule"></div>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="column is-half p-2 m-2 has-background-link-dark" style=" overflow:scroll" id="upcoming-games">
-            <h3>Upcoming Games Schedule</h3>
-            <div id="schedule-header"></div>
-            <div id="schedule"></div>
+          <!--2nd row-->
+          <div class="columns is-centered p-2 m-2 sub-container">
+            <div
+              class="column is-half p-2 m-2 has-background-link-dark"
+              style="min-height: 0vh"
+            >
+              <h3>Ticket Information</h3>
+              <div id="ticketinfo"></div>
+            </div>
+            <div
+              class="column is-half p-2 m-2 has-background-link-dark"
+              id="travelinfo"
+            >
+              <h3>Travel Information</h3>
+            </div>
           </div>
         </div>
-        <!--2nd row-->
-        <div class="columns is-centered p-2 m-2 sub-container">
-          <div class="column is-half p-2 m-2 has-background-link-dark" style="border: 1px solid white" id="ticketinfo">
-            <h3>Ticket Information</h3>
-          </div>
-          <div class="column is-half p-2 m-2 has-background-link-dark" style="border: 1px solid white" id="travelinfo">
-            <h3>Travel Information</h3>
-          </div>
-        </div>
-    </section>
-    <!--footer-->
-
-  </div>
-  <footer class="has-background-link-dark has-text-white">
-    <div class="content has-text-centered p-6 m-6">
-      <p>Copyright &copy; 2022 by
-        HOMR.
-      </p>
-      <a class="button is-light is-responsive is-outlined mt-2" href="./index.html">Back to Home</a>
+      </section>
     </div>
-  </footer>
+    <!--footer-->
+    <footer class="has-background-link-dark has-text-white">
+      <div class="content has-text-centered p-6 m-6">
+        <p>Copyright &copy; 2022 by HOMR.</p>
+        <a
+          class="button is-light is-responsive is-outlined mt-2"
+          href="./index.html"
+          >Back to Home</a
+        >
+      </div>
+    </footer>
 
-
-  </div>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script type="text/javascript" src="./assets/js/teams.js"></script>
-  <script type="text/javascript" src="./assets/js/script.js"></script>
-  <script type="text/javascript" src="./assets/js/apis.js"></script>
-  <script type="text/javascript" src="./assets/js/config.js"></script>
-  <script type="text/javascript" src="./assets/js/teams.js"></script>
-  <script type="text/javascript" src="./assets/js/team_scripts.js"></script>
-</body>
-
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+    ></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="./assets/js/teams.js"></script>
+    <script type="text/javascript" src="./assets/js/script.js"></script>
+    <script type="text/javascript" src="./assets/js/apis.js"></script>
+    <script type="text/javascript" src="./assets/js/config.js"></script>
+    <script type="text/javascript" src="./assets/js/teams.js"></script>
+    <script type="text/javascript" src="./assets/js/team_scripts.js"></script>
+  </body>
 </html>
