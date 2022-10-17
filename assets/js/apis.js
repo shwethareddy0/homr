@@ -306,10 +306,11 @@ function mlbSchedule(seasonYear) {
     fetch(apiURL).then(response => {
         if (response.ok) {
             response.json().then(data => {
+                console.log(data)
                 var scheduleInfo = [];
                 data.forEach(game => {
                     if (game.Status === 'Scheduled' || game.Status === 'Postponed') {
-                        // console.log(game.DateTime);
+                        console.log(game.DateTime);
                         scheduleInfo.push({
                             gameStatus: game.Status,
                             gameDay: game.DateTime,
