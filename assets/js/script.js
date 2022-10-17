@@ -56,56 +56,55 @@ async function mlbGetStandings() {
         cities.push(city);
         //console.log(totalwins);
         //console.log(totalLoss);
-
       }
     })
     .then(function () {
-
       // if no chart is found in the page;
-      if(!document.getElementById('chart')) {
+      if (!document.getElementById("chart")) {
         return;
       }
-      var ctx = document.getElementById('chart').getContext('2d');
+      var ctx = document.getElementById("chart").getContext("2d");
       new Chart(ctx, {
-        type: 'bar',
+        type: "bar",
         data: {
           labels: cities,
-          datasets: [{
-            label: 'Total Wins by Team',
-            data: gamewins,
-            backgroundColor: 'rgb(75, 192, 192)',
-
-
-          }],
-
-
-        }
-
-      })
-      var tx = document.getElementById('chartloss').getContext('2d');
+          datasets: [
+            {
+              label: "Total Wins by Team",
+              data: gamewins,
+              backgroundColor: "rgb(75, 192, 192)",
+            },
+          ],
+        },
+      });
+      var tx = document.getElementById("chartloss").getContext("2d");
       new Chart(tx, {
-        type: 'bar',
+        type: "bar",
         data: {
           labels: cities,
-          datasets: [{
-            label: 'Total Losses by Team',
-            data: gamelosses,
-            backgroundColor: 'rgb(255, 99, 132)'
-
-          }],
-        }
-      })
-    })
-
+          datasets: [
+            {
+              label: "Total Losses by Team",
+              data: gamelosses,
+              backgroundColor: "rgb(255, 99, 132)",
+            },
+          ],
+        },
+      });
+    });
 }
 
 function renderGames() {
   team = document.location.href.split("#")[1];
-  if ((team === "upcoming-games") || (team === "ticketinfo") || (team === "travelinfo")) {
+  if (
+    team === "upcoming-games" ||
+    team === "ticketinfo" ||
+    team === "travelinfo"
+  ) {
     renderAllGames();
     return;
   } else if (!team) {
-    console.log('no team')
+    console.log("no team");
     return;
   }
 
@@ -120,16 +119,14 @@ function renderGames() {
     return;
   }
 
-
   // var teamKey = findTeamCode(team);
-  console.log(mlbTeams[team])
-  var teamKey = mlbTeams[team]['teamKey']
+  console.log(mlbTeams[team]);
+  var teamKey = mlbTeams[team]["teamKey"];
   console.log(team + "'s key: " + teamKey);
 
   var currTeamGames = [];
 
   for (var i = 0; i < mlbSchedule.length; i++) {
-
     if (teamKey === mlbSchedule[i].homeTeam) {
       currTeamGames.push(mlbSchedule[i]);
       renderGame(mlbSchedule[i], "Home");
@@ -142,7 +139,6 @@ function renderGames() {
   if (currTeamGames.length !== 0) {
     renderEventSection(currTeamGames[0]);
   }
-
 }
 
 function renderAllGames() {
@@ -161,15 +157,12 @@ function renderAllGames() {
   }
 
   for (var i = 0; i < mlbSchedule.length; i++) {
-    
     if (i > 5) {
       return;
     }
-    renderGame(mlbSchedule[i], "All")
-    
+    renderGame(mlbSchedule[i], "All");
 
     // we only want to show the next 5 games:
-    
   }
 }
 
@@ -212,7 +205,7 @@ function renderGame(game, homeAway) {
   }
   gameEl.append(gameStatusEl);
   // gameEl.append(saveBtnEl);
-  $('#upcoming-games').append(gameEl);
+  $("#upcoming-games").append(gameEl);
 }
 
 function findOpposingTeam(opposingTeam) {
@@ -226,9 +219,9 @@ function findOpposingTeam(opposingTeam) {
 }
 
 function findTeamCode(team) {
-  mlbTeams.forEach(team => {
+  mlbTeams.forEach((team) => {
     if (team.teamName === team) {
-      return
+      return;
     }
   });
   // if (mlbTeams[team].teamKey) {
@@ -252,17 +245,16 @@ function renderEventSection(game) {
   // var timeEl = $('<p class="main-time"></p>');
   // timeEl.text("time: " + game.gameTime);
 
-  var saveBtnEl = $(
+  /*var saveBtnEl = $(
     '<button class="saveBtn button is-success is-outlined">Save</button>'
-  );
+  );*/
 
   gameEl.append(titleEl);
   // gameEl.append(dateEl);
   // gameEl.append(timeEl);
   gameEl.append(gameStatusEl);
-  gameEl.append(saveBtnEl);
+  // gameEl.append(saveBtnEl);
   eventdayEl.append(gameEl);
-
 
   // if (savedGames.length !== 0) {
   //   renderSavedGames();
@@ -270,14 +262,12 @@ function renderEventSection(game) {
 }
 
 function renderSavedGames() {
-  var headerEl = $('<h3>Saved Games:</h3>');
-  eventdayEl.append($('<br/>'));
-  eventdayEl.append($('<br/>'));
+  var headerEl = $("<h3>Saved Games:</h3>");
+  eventdayEl.append($("<br/>"));
+  eventdayEl.append($("<br/>"));
   eventdayEl.append(headerEl);
 
-  for (var i = 0; i < savedGames.length; i++) {
-
-  }
+  for (var i = 0; i < savedGames.length; i++) {}
 }
 
 // Load tickets:
