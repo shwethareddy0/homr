@@ -1,17 +1,15 @@
 # HOMR
 
-
-
 ## Description
 
 HOMR is an application that allows the user to view current wins and losses of the MLB season. As well as viewing saveing home game events of the season and a travel time approximation to get to the venue. This app runs in any browser and features dynamically updated HTML webpage elements
-and a CSS framework (Bulma) for the styling of the webpage. As well as using open source Javascript libraries such as Chart.JS and Jquery for the generation of content and using server-side apis to fetch the needed data.  
+and a CSS framework (Bulma) for the styling of the webpage. As well as using open source Javascript libraries such as Chart.JS and Jquery for the generation of content and using server-side apis to fetch the needed data.
 
 Here is the link to the [deployed application](https://shwethareddy0.github.io/homr/)
 
 ## Why?
-We wanted to create an easier way for baseball fans to see how their teams are doing for the season as well as being able to check when the next game would be for thier team.
 
+We wanted to create an easier way for baseball fans to see how their teams are doing for the season as well as being able to check when the next game would be for thier team.
 
 ### Features
 
@@ -24,7 +22,7 @@ We wanted to create an easier way for baseball fans to see how their teams are d
 - [Installation](#installation)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
-- [Credits](#credits)
+- [Collaborators](#Collaborators)
 - [License](#license)
 
 ## Installation
@@ -36,11 +34,11 @@ We wanted to create an easier way for baseball fans to see how their teams are d
 
 ## Usage
 
-This project can be used in any web browser or on any devices including  mobile devices.
+This project can be used in any web browser or on any devices including mobile devices.
 
 The following image is the demo screenshot of the deployed application.
 
-![Demo screenshot]()
+![Demo screenshot](./images/HOMR-Demo.gif)
 
 Following is a code snippet of the application page.
 
@@ -68,14 +66,15 @@ Here it refers to the navbar-brand, HOMR logo.
 - jQuery
 - BULMA
 - Server Side APIs
-    -TicketMaster, SportsIO, Uber
+- TicketMaster, SportsIO, Uber
 - Chart.js
 
-## Credits
+## Collaborators
 
-- Angellyn218
+- Angel Cervantes, GitHub[https://github.com/Angellyn218]
 - Allen Klein, GitHub[https://github.com/allen-ek/]
-- Dempleon
+- Daryl Empleo, GitHub[https://github.com/Dempleon]
+- Swetha Pothuganti, GitHub[https://github.com/shwethareddy0]
 
 ## License
 
