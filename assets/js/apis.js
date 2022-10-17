@@ -302,7 +302,7 @@ async function nbaGetTeamIds(teamName) {
 function mlbSchedule(seasonYear) {
     var apiURL = 'https://api.sportsdata.io/v3/mlb/scores/json/Games/' + seasonYear + '?key=' + config.mlbKey;
 
-    console.log(apiURL);
+    // console.log(apiURL);
     fetch(apiURL).then(response => {
         if (response.ok) {
             response.json().then(data => {
@@ -323,7 +323,7 @@ function mlbSchedule(seasonYear) {
                 })
 
                 // access scheduleInfo here to build dynamic html
-                console.log(scheduleInfo);
+                // console.log(scheduleInfo);
                 localStorage.setItem('mlbSchedule', JSON.stringify(scheduleInfo));
             })
         }

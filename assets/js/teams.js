@@ -1,301 +1,361 @@
 var mlbTeams = {
-    "Dodgers":{
+    "Dodgers": {
         "teamID": 1,
         "city": "Los Angeles",
         "teamName": "Dodgers",
         "teamKey": "LAD",
         "league": "NL",
         "division": "West",
+        "parkLocation": [34.0739, -118.2400],
+        "parkName": 'Dodgers Stadium',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Los_Angeles_Dodgers_Logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/f/f6/LA_Dodgers.svg"
     },
-    "Reds":{
+    "Reds": {
         "teamID": 2,
         "city": "Cincinnati",
         "teamName": "Reds",
         "teamKey": "CIN",
         "league": "NL",
         "division": "Central",
+        "parkLocation": [39.0974, -84.5071],
+        "parkName": 'Great American Ball Park',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/0/01/Cincinnati_Reds_Logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/7/71/Cincinnati_Reds_Cap_Insignia.svg"
     },
-    "Blue Jays":{
+    "Blue Jays": {
         "teamID": 3,
         "city": "Toronto",
         "teamName": "Blue Jays",
         "teamKey": "TOR",
         "league": "AL",
         "division": "East",
+        "parkLocation": [43.641796, -79.390083],
+        "parkName": 'Rogers Centre',
         "logo": "https://upload.wikimedia.org/wikipedia/en/b/ba/Toronto_Blue_Jays_logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/en/thumb/6/68/Toronto_Blue_Jays_cap.svg/119px-Toronto_Blue_Jays_cap.svg.png"
     },
-    "Pirates":{
+    "Pirates": {
         "teamID": 4,
         "city": "Pittsburgh",
         "teamName": "Pirates",
         "teamKey": "PIT",
         "league": "NL",
         "division": "Central",
+        "parkLocation": [40.4469, -80.0057],
+        "parkName": 'PNC Park',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/8/81/Pittsburgh_Pirates_logo_2014.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/2/24/Pittsburgh_Pirates_Cap_Insignia.svg"
     },
-    "Royals":{
+    "Royals": {
         "teamID": 5,
         "city": "Kansas City",
         "teamName": "Royals",
         "teamKey": "KC",
         "league": "AL",
         "division": "Central",
+        "parkLocation": [39.0517, -94.4803],
+        "parkName": 'Kauffman Stadium',
         "logo": "https://upload.wikimedia.org/wikipedia/en/1/1c/Kansas_City_Royals.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/8/88/Kansas_City_Royals_Insignia.svg"
     },
-    "Cubs":{
+    "Cubs": {
         "teamID": 9,
         "city": "Chicago",
         "teamName": "Cubs",
         "teamKey": "CHC",
         "league": "NL",
         "division": "Central",
+        "parkLocation": [41.9484, -87.6553],
+        "parkName": 'Wrigley Field',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/8/80/Chicago_Cubs_logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/8/89/Chicago_Cubs_Cap_Insignia.svg"
     },
-    "Guardians":{
+    "Guardians": {
         "teamID": 10,
         "city": "Cleveland",
         "teamName": "Guardians",
         "teamKey": "CLE",
         "league": "AL",
         "division": "Central",
+        "parkLocation": [41.4962, -81.6852],
+        "parkName": 'Progressive Field',
         "logo": "https://upload.wikimedia.org/wikipedia/en/a/a9/Guardians_winged_%22G%22.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/3/3f/Cleveland_Guardians_cap_logo.svg"
     },
-    "Rays":{
+    "Rays": {
         "teamID": 11,
         "city": "Tampa Bay",
         "teamName": "Rays",
         "teamKey": "TB",
         "league": "AL",
         "division": "East",
+        "parkLocation": [27.7682, -82.6534],
+        "parkName": 'Tropicana Field',
         "logo": "https://upload.wikimedia.org/wikipedia/en/c/c6/Tampa_Bay_Rays.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/e/e2/ALE-TB-Insignia.png"
     },
-    "Phillies":{
+    "Phillies": {
         "teamID": 12,
         "city": "Philadelphia",
         "teamName": "Phillies",
         "teamKey": "PHI",
         "league": "NL",
         "division": "East",
+        "parkLocation": [39.9061, -75.1665],
+        "parkName": 'Citizens Bank Park',
         "logo": "https://upload.wikimedia.org/wikipedia/en/f/f0/Philadelphia_Phillies_%282019%29_logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Philadelphia_Phillies_Insignia.svg"
     },
-    "Mariners":{
+    "Mariners": {
         "teamID": 13,
         "city": "Seattle",
         "teamName": "Mariners",
         "teamKey": "SEA",
         "league": "AL",
         "division": "West",
+        "parkLocation": [47.5913, -122.3325],
+        "parkName": 'T-Mobile Park',
         "logo": "https://upload.wikimedia.org/wikipedia/en/6/6d/Seattle_Mariners_logo_%28low_res%29.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/en/8/8a/Seattle_Mariners_Insignia.svg"
     },
-    "Diamondbacks":{
+    "Diamondbacks": {
         "teamID": 14,
         "city": "Arizona",
         "teamName": "Diamondbacks",
         "teamKey": "ARI",
         "league": "NL",
         "division": "West",
+        "parkLocation": [33.4453, -112.0667],
+        "parkName": 'Chase Field',
         "logo": "https://upload.wikimedia.org/wikipedia/en/5/54/Arizona_Diamondbacks_logo_%28low_res%29.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Arizona_Diamondbacks_cap_logo.svg/114px-Arizona_Diamondbacks_cap_logo.svg.png"
     },
-    "Giants":{
+    "Giants": {
         "teamID": 15,
         "city": "San Francisco",
         "teamName": "Giants",
         "teamKey": "SF",
         "league": "NL",
         "division": "West",
+        "parkLocation": [37.7786, -122.3893],
+        "parkName": 'Oracle Park',
         "logo": "https://upload.wikimedia.org/wikipedia/en/5/58/San_Francisco_Giants_Logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/San_Francisco_Giants_Cap_Insignia.svg/97px-San_Francisco_Giants_Cap_Insignia.svg.png"
     },
-    "White Sox":{
+    "White Sox": {
         "teamID": 16,
         "city": "Chicago",
         "teamName": "White Sox",
         "teamKey": "CHW",
         "league": "AL",
         "division": "Central",
+        "parkLocation": [41.8299, -87.6338],
+        "parkName": 'Guaranteed Rate Field',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Chicago_White_Sox.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Chicago_White_Sox_Insignia.svg"
     },
-    "Tigers":{
+    "Tigers": {
         "teamID": 17,
         "city": "Detroit",
         "teamName": "Tigers",
         "teamKey": "DET",
         "league": "AL",
         "division": "Central",
+        "parkLocation": [42.3390, -83.0485],
+        "parkName": 'Comerica Park',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Detroit_Tigers_logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/9/94/Detroit_Tigers_Insignia.svg"
     },
-    "Mets":{
+    "Mets": {
         "teamID": 18,
         "city": "New York",
         "teamName": "Mets",
         "teamKey": "NYM",
         "league": "NL",
         "division": "East",
+        "parkLocation": [40.7571, -73.8458],
+        "parkName": 'Citi Field',
         "logo": "https://upload.wikimedia.org/wikipedia/en/7/7b/New_York_Mets.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/en/7/7b/New_York_Mets.svg"
     },
-    "Orioles":{
+    "Orioles": {
         "teamID": 19,
         "city": "Baltimore",
         "teamName": "Orioles",
         "teamKey": "BAL",
         "league": "AL",
         "division": "East",
+        "parkLocation": [39.2838, -76.6217],
+        "parkName": 'Camden Yards',
         "logo": "https://upload.wikimedia.org/wikipedia/en/7/75/Baltimore_Orioles_cap.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/en/thumb/7/75/Baltimore_Orioles_cap.svg/105px-Baltimore_Orioles_cap.svg.png"
     },
-    "Twins":{
+    "Twins": {
         "teamID": 20,
         "city": "Minnesota",
         "teamName": "Twins",
         "teamKey": "MIN",
         "league": "AL",
         "division": "Central",
+        "parkLocation": [44.9817, -93.2776],
+        "parkName": 'Target Field',
         "logo": "https://upload.wikimedia.org/wikipedia/en/b/b4/Minnesota_Twins_logo_%28low_res%29.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Minnesota_Twins_Insignia.svg"
     },
-    "Angels":{
+    "Angels": {
         "teamID": 21,
         "city": "Los Angeles",
         "teamName": "Angels",
         "teamKey": "LAA",
         "league": "AL",
         "division": "West",
+        "parkLocation": [33.8003, -117.8827],
+        "parkName": 'Stadium of Anaheim',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Los_Angeles_Angels_of_Anaheim.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/7/79/Los_Angeles_Angels_of_Anaheim_Insignia.svg"
     },
-    "Marlins":{
+    "Marlins": {
         "teamID": 22,
         "city": "Miami",
         "teamName": "Marlins",
         "teamKey": "MIA",
         "league": "NL",
         "division": "East",
+        "parkLocation": [25.7781, -80.2196],
+        "parkName": 'LoanDepot Park',
         "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fd/Marlins_team_logo.svg/800px-Marlins_team_logo.svg.png",
         "mark": "https://upload.wikimedia.org/wikipedia/en/c/c3/Miami_Marlins_cap_insignia.svg"
     },
-    "Rockies":{
+    "Rockies": {
         "teamID": 23,
         "city": "Colorado",
         "teamName": "Rockies",
         "teamKey": "COL",
         "league": "NL",
         "division": "West",
+        "parkLocation": [39.7559, -104.9942],
+        "parkName": 'Coors Field',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/3/31/Colorado_Rockies_logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Colorado_Rockies_Cap_Insignia.svg/97px-Colorado_Rockies_Cap_Insignia.svg.png"
     },
-    "Athletics":{
+    "Athletics": {
         "teamID": 24,
         "city": "Oakland",
         "teamName": "Athletics",
         "teamKey": "OAK",
         "league": "AL",
         "division": "West",
+        "parkLocation": [37.7516, -122.2005],
+        "parkName": 'RingCentral Coliseum',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Oakland_A%27s_logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Oakland_Athletics_cap_logo.png"
     },
-    "Red Sox":{
+    "Red Sox": {
         "teamID": 25,
         "city": "Boston",
         "teamName": "Red Sox",
         "teamKey": "BOS",
         "league": "AL",
         "division": "East",
+        "parkLocation": [42.3467, -71.0972],
+        "parkName": 'Fenway Park',
         "logo": "https://upload.wikimedia.org/wikipedia/en/6/6d/RedSoxPrimary_HangingSocks.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/2/21/Bosb.png"
     },
-    "Braves":{
+    "Braves": {
         "teamID": 26,
         "city": "Atlanta",
         "teamName": "Braves",
         "teamKey": "ATL",
         "league": "NL",
         "division": "East",
+        "parkLocation": [33.8911, -84.4684],
+        "parkName": 'Truit Park',
         "logo": "https://upload.wikimedia.org/wikipedia/en/f/f2/Atlanta_Braves.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Atlanta_Braves_Insignia.svg"
     },
-    "Rangers":{
+    "Rangers": {
         "teamID": 28,
         "city": "Texas",
         "teamName": "Rangers",
         "teamKey": "TEX",
         "league": "AL",
         "division": "West",
+        "parkLocation": [32.7510, -97.0830],
+        "parkName": 'Choctaw Stadium',
         "logo": "https://upload.wikimedia.org/wikipedia/en/4/41/Texas_Rangers.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Texas_Rangers_Insignia.svg"
     },
-    "Yankees":{
+    "Yankees": {
         "teamID": 29,
         "city": "New York",
         "teamName": "Yankees",
         "teamKey": "NYY",
         "league": "AL",
         "division": "East",
+        "parkLocation": [40.8296, -73.9262],
+        "parkName": 'Yankee Stadium',
         "logo": "https://upload.wikimedia.org/wikipedia/en/2/25/NewYorkYankees_PrimaryLogo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/7/70/NewYorkYankees_caplogo.svg"
     },
-    "Astros":{
+    "Astros": {
         "teamID": 30,
         "city": "Houston",
         "teamName": "Astros",
         "teamKey": "HOU",
         "league": "AL",
         "division": "West",
+        "parkLocation": [29.7573, -95.3555],
+        "parkName": 'Minute Maid Park',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Houston-Astros-Logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Houston_Astros_cap_logo.svg"
     },
-    "Cardinals":{
+    "Cardinals": {
         "teamID": 31,
         "city": "St. Louis",
         "teamName": "Cardinals",
         "teamKey": "STL",
         "league": "NL",
         "division": "Central",
+        "parkLocation": [38.6226, -90.1928],
+        "parkName": 'Busch Stadium',
         "logo": "https://upload.wikimedia.org/wikipedia/en/9/9d/St._Louis_Cardinals_logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/e/ee/St_Louis_Cardinals_Cap_Insignia.svg"
     },
-    "Brewers":{
+    "Brewers": {
         "teamID": 32,
         "city": "Milwaukee",
         "teamName": "Brewers",
         "teamKey": "MIL",
         "league": "NL",
         "division": "Central",
+        "parkLocation": [43.0280, -87.9712],
+        "parkName": 'American Family Field',
         "logo": "https://upload.wikimedia.org/wikipedia/en/b/b8/Milwaukee_Brewers_logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/en/b/b8/Milwaukee_Brewers_logo.svg"
     },
-    "Padres":{
+    "Padres": {
         "teamID": 33,
         "city": "San Diego",
         "teamName": "Padres",
         "teamKey": "SD",
         "league": "NL",
         "division": "West",
+        "parkLocation": [32.7073, -117.1567],
+        "parkName": 'Petco Park',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e2/SD_Logo_Brown.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/San_Diego_Padres_logotype.svg/100px-San_Diego_Padres_logotype.svg.png"
     },
-    "Nationals":{
+    "Nationals": {
         "teamID": 35,
         "city": "Washington",
         "teamName": "Nationals",
         "teamKey": "WSH",
         "league": "NL",
         "division": "East",
+        "parkLocation": [38.8730, -77.0074],
+        "parkName": 'Nationals Park',
         "logo": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Washington_Nationals_logo.svg",
         "mark": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Washington_Nationals_Cap_Insig.svg"
     }
