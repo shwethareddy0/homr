@@ -11,21 +11,30 @@ Here is the link to the [deployed application](https://shwethareddy0.github.io/h
 
 We wanted to create an easier way for baseball fans to see how their teams are doing for the season as well as being able to check when the next game would be for thier team.
 
-### Learning Objectives
-
-1.Gain a better understanding and usage on Bulma a CSS framework library to style the page into a moblie screen focused application.
-
-2.Learn more about how to use api calls to fetch a response and parse through the response for the necessary information to incorperate into our web application.
-
-3.Learn how to incorprate and use Chart.JS a third party javascript library to help visualize data that renders onto the webpage.
-
-4. Learn more about dynamic generation and appending to the webpage as well as how to build and link two HTML pages together.
-
 ### Features
 
 - Fully Responsive
 - Easy to modify
 - Supports HTML5, CSS3 & JavaScript
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Collaborators](#Collaborators)
+- [License](#license)
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- jQuery
+- BULMA
+- Server Side APIs
+- TicketMaster, SportsIO, TravelTime apis
+- Chart.js
 
 ## User Stories
 
@@ -71,12 +80,15 @@ mlbSchedule('2023');
 ```
 
 - As a user, I want to be able to see the stats for the team that I root for on the front page
+
   ![img](./images/HOMR-frontpage.gif)
 
 - As a user, I want a dropdown menu to select my favorite team
+
   ![img](./images/team-selectiondropdown.gif)
 
 - As a user, I want to see the games’ ticket prices with a link to where I can buy them
+
   ![img](./images/ticketlink.gif)
 
 ## Description of CSS framework used (links to Docs)
@@ -90,13 +102,16 @@ This means it provides CSS classes to help you style your HTML code.
 
 ## Gif of site at different screen sizes
 
-Mobile version of the app
+Mobile version of the app <br>
+
 ![img](./images/homr-mobile.gif)
 
 Desktop version of the app
+
 ![img](./images/homr-desktop.gif)
 
 Wide Screen version of the app
+
 ![img](./images/homr-widescreen.gif)
 
 Following is a code snippet using BULMA css framework in the application.
@@ -118,14 +133,6 @@ Here it is used for the HOMR logo.
         </div>
 ```
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Technologies Used](#technologies-used)
-- [Collaborators](#Collaborators)
-- [License](#license)
-
 ## Installation
 
 - Create a new repository on your GitHub account.
@@ -141,16 +148,15 @@ The following image is the demo screenshot of the deployed application.
 
 ![Demo screenshot](./images/HOMR-Demo.gif)
 
-## Technologies Used
+### Learning Objectives
 
-- HTML5
-- CSS3
-- JavaScript
-- jQuery
-- BULMA
-- Server Side APIs
-- TicketMaster, SportsIO, TravelTime apis
-- Chart.js
+1. Gain a better understanding and usage on Bulma a CSS framework library to style the page into a moblie screen focused application.
+
+2. Learn more about how to use api calls to fetch a response and parse through the response for the necessary information to incorperate into our web application.
+
+3. Learn how to incorprate and use Chart.JS a third party javascript library to help visualize data that renders onto the webpage.
+
+4. Learn more about dynamic generation and appending to the webpage as well as how to build and link two HTML pages together.
 
 ## Collaborators
 
