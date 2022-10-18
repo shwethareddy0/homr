@@ -10,6 +10,7 @@ Here is the link to the [deployed application](https://shwethareddy0.github.io/h
 ## Why?
 
 We wanted to create an easier way for baseball fans to see how their teams are doing for the season as well as being able to check when the next game would be for thier team.
+
 ### Learning Objectives
 
 1.Gain a better understanding and usage on Bulma a CSS framework library to style the page into a moblie screen focused application.
@@ -27,8 +28,9 @@ We wanted to create an easier way for baseball fans to see how their teams are d
 - Supports HTML5, CSS3 & JavaScript
 
 ## User Stories
+
 - As a user, I want to search for games of my favorite team so that I can see their upcoming games
-![img](./images/search-for-team.gif)
+  ![img](./images/search-for-team.gif)
 
 ```
 function mlbSchedule(seasonYear) {
@@ -69,37 +71,52 @@ mlbSchedule('2023');
 ```
 
 - As a user, I want to be able to see the stats for the team that I root for on the front page
-![img](./images/HOMR-frontpage.gif)
+  ![img](./images/HOMR-frontpage.gif)
 
 - As a user, I want a dropdown menu to select my favorite team
-![img](./images/team-selectiondropdown.gif)
+  ![img](./images/team-selectiondropdown.gif)
 
 - As a user, I want to see the games’ ticket prices with a link to where I can buy them
-![img](./images/ticketlink.gif)
+  ![img](./images/ticketlink.gif)
 
+## Description of CSS framework used (links to Docs)
 
+## BULMA
 
-
-## BULMA - Description of CSS framework used (links to Docs)
 Bulma is a free, open source CSS library that provides ready-to-use frontend components that you can easily combine to build responsive web interfaces.
 
 This means it provides CSS classes to help you style your HTML code.
 [Docs](https://bulma.io/documentation/)
 
-
 ## Gif of site at different screen sizes
-Mobile version of the app 
+
+Mobile version of the app
 ![img](./images/homr-mobile.gif)
 
-Desktop version of the app 
+Desktop version of the app
 ![img](./images/homr-desktop.gif)
 
-Wide Screen version of the app 
+Wide Screen version of the app
 ![img](./images/homr-widescreen.gif)
 
+Following is a code snippet using BULMA css framework in the application.
 
+The navbar-brand class usually contains the logo and optionally some links or icon.
+Here it is used for the HOMR logo.
 
+```html5
 
+ <div class="navbar-brand">
+          <a class="navbar-item">
+            <img
+              src="./images/logo.jpg"
+              alt="HOMR logo"
+              style="max-height: 100px"
+              class="p-2"
+            />
+          </a>
+        </div>
+```
 
 ## Table of Contents
 
@@ -123,24 +140,6 @@ This project can be used in any web browser or on any devices including mobile d
 The following image is the demo screenshot of the deployed application.
 
 ![Demo screenshot](./images/HOMR-Demo.gif)
-
-Following is a code snippet of the application page.
-
-Here it refers to the navbar-brand, HOMR logo.
-
-```html5
-
- <div class="navbar-brand">
-          <a class="navbar-item">
-            <img
-              src="./images/logo.jpg"
-              alt="HOMR logo"
-              style="max-height: 100px"
-              class="p-2"
-            />
-          </a>
-        </div>
-```
 
 ## Technologies Used
 
